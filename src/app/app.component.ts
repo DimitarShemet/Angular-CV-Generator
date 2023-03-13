@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +9,15 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 export class AppComponent {
   constructor(public fb: FormBuilder) {}
   form = this.fb.group({
-    control: [{ value: 123, disabled: false }, Validators.required],
+    input: ['', [Validators.required, Validators.maxLength(10)]],
+    date: [null, Validators.required],
+    textarea: ['', Validators.required],
+    select: ['', Validators.required],
   });
+  listOfOption = [
+    { label: 'label1', value: 'value1' },
+    { label: 'label2', value: 'value2' },
+  ];
   ngOnInit() {
     this.form.valueChanges.subscribe((data) => {
       console.log(data);

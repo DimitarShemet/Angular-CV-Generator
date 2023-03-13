@@ -1,0 +1,58 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  background-color: #e5e5e5;
+  width: 100%;
+  height: 100%;
+  .lang__icon {
+    align-self: flex-end;
+    margin-top: 19px;
+    margin-right: 23px;
+    flex: 0 0 auto;
+  }
+  .login__wrapper {
+    flex: 1 0 auto;
+    align-self: center;
+    width: 360px;
+    margin: 111.5px auto 0px;
+    .login__title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .logo {
+        margin-right: 17.43px;
+      }
+      span {
+        font-family: "Avenir";
+        font-style: normal;
+        font-weight: 800;
+        font-size: 33px;
+        line-height: 38px;
+        letter-spacing: 0.005em;
+      }
+    }
+    .details {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 23px;
+      align-items: center;
+      label {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+      }
+      span {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #1890ff;
+      }
+    }
+  }
+  .question__icon {
+    flex: 0 0 auto;
+    align-self: flex-end;
+    margin-right: 77px;
+    margin-bottom: 42px;
+  }
+}

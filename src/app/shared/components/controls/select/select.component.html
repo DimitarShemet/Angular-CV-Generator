@@ -1,0 +1,16 @@
+<nz-form-item>
+  <nz-form-label nzFor="select" nzRequired>{{ label }} </nz-form-label>
+  <nz-select
+    [formControl]="formControl"
+    [nzPlaceHolder]="placeholder"
+    [nzShowArrow]="false"
+  >
+    <nz-option
+      *ngFor="let option of listOfOption"
+      [nzLabel]="option.label"
+      [nzValue]="option.value"
+    ></nz-option>
+  </nz-select>
+
+  <small class="validation"> {{ error$ }} </small>
+</nz-form-item>

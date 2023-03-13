@@ -1,0 +1,11 @@
+<nz-form-item>
+  <nz-form-label nzFor="textarea" nzRequired>{{ label }}</nz-form-label>
+  <textarea
+    id="textarea"
+    nz-input
+    [formControl]="formControl"
+    [placeholder]="placeholder"
+  ></textarea>
+
+  <small class="validation"> {{ error$ }} </small>
+</nz-form-item>
