@@ -103,23 +103,7 @@
       </span>
       <span>Ant Design</span>
     </div>
-    <form [formGroup]="form">
-      <app-input
-        formControlName="username"
-        placeholder="Username"
-        label="Username"
-      ></app-input>
-      <app-input
-        formControlName="password"
-        placeholder="password"
-        label="Password"
-      ></app-input>
-    </form>
-    <div class="details">
-      <label nz-checkbox>Remember me</label>
-      <span>Forgot your password?</span>
-    </div>
-    <button nz-button nzType="primary" nzSize="large" nzBlock>Login</button>
+    <auth-form></auth-form>
   </div>
   <span class="question__icon">
     <svg

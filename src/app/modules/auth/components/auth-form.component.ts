@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'auth-form',
+  templateUrl: './auth-form.component.html',
+  styleUrls: ['./auth-form.component.scss'],
 })
-export class LoginComponent {
+export class AuthFormComponent {
   constructor(public fb: FormBuilder) {}
   form = this.fb.group({
     username: ['', [Validators.required]],

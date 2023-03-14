@@ -17,15 +17,16 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { InputComponent } from './shared/components/controls/input/input.component';
 
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { DatepickerComponent } from './shared/components/controls/datepicker/datepicker.component';
 import { SelectComponent } from './shared/components/controls/select/select.component';
 import { TextareaComponent } from './shared/components/controls/textarea/textarea.component';
+import { CoreModule } from './modules/core/core.module';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, BaseControl],
+  declarations: [AppComponent],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
   imports: [
@@ -38,10 +39,12 @@ registerLocaleData(en);
     NzLayoutModule,
     NzMenuModule,
     AuthModule,
+    CoreModule,
     InputComponent,
     TextareaComponent,
     SelectComponent,
     DatepickerComponent,
+    BaseControl,
   ],
 })
 export class AppModule {}

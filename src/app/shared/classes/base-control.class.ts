@@ -1,4 +1,5 @@
 import { Directive, Input } from '@angular/core';
+
 import {
   ControlValueAccessor,
   FormControl,
@@ -8,6 +9,7 @@ import {
 
 @Directive({
   selector: '[appBaseAccessor]',
+  standalone: true,
 })
 export class BaseControl implements ControlValueAccessor {
   @Input() type?: string = 'text';
@@ -47,19 +49,6 @@ export class BaseControl implements ControlValueAccessor {
     });
 
     this.formControl.setValidators(this.ngControl.control?.validator || null);
-    this.ngControl.statusChanges.subscribe((state) => {
-      if (state === 'INVALID') {
-        this.getErrorMessage(this.ngControl.control.errors);
-      } else {
-        this.error$ = '';
-      }
-    });
-  }
-
-  getErrorMessage(errors: ValidationErrors | null) {
-    if (errors) {
-      const errorKey = Object.keys(errors)[0];
-      this.error$ = this.errors?.[errorKey];
-    }
+    // this.formControl.updateValueAndValidity();
   }
 }

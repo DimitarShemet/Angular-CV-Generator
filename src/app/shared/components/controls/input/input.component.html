@@ -12,5 +12,9 @@
   <ng-template #suffixTemplateInfo>
     <span nz-icon nzType="info-circle"></span>
   </ng-template>
-  <small class="validation"> {{ error$ }} </small>
+  <small class="validation" *ngIf="formControl.dirty">
+    {{ formControl.errors | getErrorMessage }}
+  </small>
+  <!-- <small class="validation"> {{ control.errors | getErrorMessage | translate }} </small> -->
+  <!-- <small class="validation"> {{ formControl.errors | json }} </small> -->
 </nz-form-item>

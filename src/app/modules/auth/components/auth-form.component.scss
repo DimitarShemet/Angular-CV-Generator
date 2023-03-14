@@ -1,0 +1,17 @@
+.details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 23px;
+  align-items: center;
+  label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+  }
+  span {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #1890ff;
+  }
+}
