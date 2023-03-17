@@ -1,13 +1,7 @@
 <nz-form-item>
   <nz-form-label nzFor="email" nzRequired>{{ label }}</nz-form-label>
   <nz-input-group [nzSuffix]="icon ? suffixTemplateInfo : null">
-    <input
-      nz-input
-      id="email"
-      [formControl]="formControl"
-      [type]="type"
-      [placeholder]="placeholder"
-    />
+    <input nz-input id="email" [formControl]="formControl" [type]="type" />
   </nz-input-group>
   <ng-template #suffixTemplateInfo>
     <span nz-icon nzType="info-circle"></span>

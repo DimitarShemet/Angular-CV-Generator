@@ -1,0 +1,33 @@
+export enum ModulePath {
+  Auth = 'auth',
+  AuthFullPath = '/auth',
+  Core = '',
+  CoreFullPath = '/',
+  Dashboard = 'dashboard',
+  DashboardFullPath = '/dashboard',
+  Employees = 'employees',
+  EmployeesFullPath = '/employees',
+  Projects = 'projects',
+  ProjectsFullPath = '/projects',
+}
+
+export enum PagePath {
+  Auth = 'login',
+  AuthFullPath = '/login',
+  Core = '',
+  Dashboard = '',
+  Employees = '',
+  Projects = '',
+  EmployeeCreate = 'create',
+  EmployeeEdit = 'edit/:id',
+  ProjectCreate = 'create',
+  ProjectEdit = 'edit/:id',
+  CoreFullPath = '/',
+  DashboardFullPath = '/',
+  EmployeesFullPath = '/',
+  ProjectsFullPath = '/',
+  EmployeeCreateFullPath = '/create',
+  EmployeeEditFullPath = '/edit/:id',
+  ProjectCreateFullPath = '/create',
+  ProjectEditFullPath = '/edit/:id',
+}

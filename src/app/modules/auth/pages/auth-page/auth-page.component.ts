@@ -5,8 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './auth-page.component.html',
   styleUrls: ['./auth-page.component.scss'],
 })
-export class AuthPageComponent {
-  ngOnInit() {
-    alert(1);
-  }
-}
+export class AuthPageComponent {}

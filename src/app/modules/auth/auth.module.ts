@@ -8,6 +8,9 @@ import { InputComponent } from 'src/app/shared/components/controls/input/input.c
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthFormComponent } from './components/auth-form.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'src/app/app.module';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [AuthFormComponent, AuthPageComponent],
@@ -18,8 +21,8 @@ import { AuthFormComponent } from './components/auth-form.component';
     FormsModule,
     NzCheckboxModule,
     NzButtonModule,
-    InputComponent,
     AuthRoutingModule,
+    TranslateModule,
   ],
 })
 export class AuthModule {}
