@@ -1,9 +1,18 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CoreModule } from 'src/app/modules/core/core.module';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmployeesApiService {
-
-  constructor() { }
+  constructor(private http: HttpClient) {}
+  getEmployees() {
+    this.http
+      .get(environment.BACKEND_URL + '/api/users')
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
 }

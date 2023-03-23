@@ -49,6 +49,5 @@ export class BaseControl implements ControlValueAccessor {
     });
 
     this.formControl.setValidators(this.ngControl.control?.validator || null);
-    // this.formControl.updateValueAndValidity();
   }
 }

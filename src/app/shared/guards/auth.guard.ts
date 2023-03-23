@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRoute,
-  CanActivate,
-  CanActivateChild,
-  Router,
-} from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
+import { ModulePath } from '../enums/routing-path.enums';
 
 import { AuthService } from '../services/auth.service';
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate, CanActivateChild {
-  constructor(public authService: AuthService) {}
+export class AuthGuard implements CanActivate {
+  constructor(public authService: AuthService, private router: Router) {}
   canActivate() {
-    return this.authService.isAuthenticated();
-  }
-  canActivateChild() {
-    return this.canActivate();
+    if (this.authService.isAuthenticated()) {
+      console.log(this.authService.isAuthenticated());
+      return true;
+    }
+    this.router.navigate([ModulePath.AuthFullPath]);
+    return false;
   }
 }
