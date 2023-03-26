@@ -19,7 +19,6 @@ import { reducers } from './store/reducers/index';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
-import { AccessInterceptor } from './shared/interceptors/access.interceptor';
 
 registerLocaleData(en);
 
@@ -56,7 +55,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       useClass: AuthInterceptor,
       multi: true,
     },
-    { provide: HTTP_INTERCEPTORS, useClass: AccessInterceptor, multi: true },
   ],
 })
 export class AppModule {}

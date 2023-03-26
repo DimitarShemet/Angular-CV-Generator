@@ -1,4 +1,12 @@
-<app-header></app-header>
-<app-nav> </app-nav>
-<app-side-bar></app-side-bar>
-<router-outlet></router-outlet>
+<div class="core__header">
+  <app-header></app-header>
+</div>
+<div class="core__wrapper">
+  <div class="core__sidebar">
+    <app-side-bar></app-side-bar>
+  </div>
+  <div class="core__main">
+    <app-nav> </app-nav>
+    <router-outlet></router-outlet>
+  </div>
+</div>

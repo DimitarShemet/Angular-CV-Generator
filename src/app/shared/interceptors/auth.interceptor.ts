@@ -5,11 +5,15 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { TOKEN } from '../constants/storage.consts';
+import { Router } from '@angular/router';
+import { EMPTY, Observable } from 'rxjs';
+import { TOKEN } from '../constants/token.consts';
+import { ModulePath } from '../enums/routing-path.enums';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  constructor(private authService: AuthService, private router: Router) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -18,12 +22,17 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    const clonedReq = req.clone({
-      headers: req.headers.append(
-        'Authorization',
-        'Bearer ' + localStorage.getItem(TOKEN)
-      ),
-    });
-    return next.handle(clonedReq);
+    if (this.authService.isUserHasAccess) {
+      const clonedReq = req.clone({
+        headers: req.headers.append(
+          'Authorization',
+          'Bearer ' + localStorage.getItem(TOKEN)
+        ),
+      });
+      return next.handle(clonedReq);
+    } else {
+      this.router.navigate([ModulePath.AuthFullPath]);
+      return EMPTY;
+    }
   }
 }

@@ -1,0 +1,14 @@
+.wrapper {
+  padding: 20px 24px 0px;
+  background-color: #e5e5e5;
+  .inner {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding-top: 40.5px;
+  }
+  button {
+    align-self: flex-end;
+    margin-right: 25px;
+  }
+}

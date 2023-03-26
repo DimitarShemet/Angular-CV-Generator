@@ -1,1 +1,33 @@
-<p>side-bar works!</p>
+<div class="wrapper">
+  <ul
+    nz-menu
+    nzMode="vertical"
+    nzTheme="light"
+    [nzInlineCollapsed]="isCollapsed"
+  >
+    <li
+      nz-menu-item
+      nz-tooltip
+      nzTooltipPlacement="right"
+      [nzTooltipTitle]="isCollapsed ? 'Dashboard' : ''"
+      nzSelected
+    >
+      <span nz-icon nzType="dashboard" nzTheme="outline"></span>
+      <span>Dashboard</span>
+    </li>
+    <li nz-menu-item nzTitle="Employees">
+      <span nz-icon nzType="form" nzTheme="outline"></span>
+      <span>Employees</span>
+    </li>
+    <li nz-menu-item nzTitle="Projects">
+      <span nz-icon nzType="database" nzTheme="outline"></span>
+      <span>Projects</span>
+    </li>
+  </ul>
+  <div class="sidebar__footer">
+    <nz-divider></nz-divider>
+    <span (click)="toggleCollapsed()">
+      <span nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
+    </span>
+  </div>
+</div>
