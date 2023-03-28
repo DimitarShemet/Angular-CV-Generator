@@ -1,14 +1,22 @@
 .wrapper {
+  display: flex;
+  flex-direction: column;
   width: 208px;
   margin-left: 16px;
+  transition: width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
 }
-
+.wrapper__collapsed {
+  width: 80px;
+}
 button {
   margin-bottom: 12px;
 }
 ul {
-  height: calc(100vh - 104px);
+  flex: 1 0 auto;
 }
 .sidebar__footer {
   height: 40px;
+}
+nz-divider {
+  margin-bottom: 5px;
 }

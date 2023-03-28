@@ -1,1 +1,55 @@
-<p>project-form works!</p>
+<form class="project__form" [formGroup]="projectForm">
+  <div class="project__form_row">
+    <app-input
+      formControlName="name"
+      placeholder="type your name"
+      label="Name"
+      class="project__form_item"
+    ></app-input>
+    <app-datepicker
+      formControlName="startDate"
+      label="Start date"
+      class="project__form_item"
+    ></app-datepicker>
+    <app-datepicker
+      formControlName="endDate"
+      class="project__form_item"
+      label="End date"
+    ></app-datepicker>
+  </div>
+  <div class="project__form_row">
+    <app-input
+      formControlName="teamSize"
+      placeholder="type team size"
+      label="Team size"
+      class="project__form_item"
+    ></app-input>
+
+    <app-select
+      formControlName="techStack"
+      placeholder="Tech stack"
+      class="project__form_item"
+      label="Tech stack"
+    ></app-select>
+    <app-select
+      formControlName="roles"
+      placeholder="Roles"
+      class="project__form_item"
+      label="Roles"
+    ></app-select>
+  </div>
+  <div class="project__form_row">
+    <app-textarea
+      formControlName="description"
+      label="Description"
+      placeholder="Autosize height based on content lines"
+      class="project__form_item"
+    ></app-textarea>
+    <app-textarea
+      formControlName="responsibilities"
+      label="Responsibilities"
+      placeholder="Autosize height based on content lines"
+      class="project__form_item"
+    ></app-textarea>
+  </div>
+</form>

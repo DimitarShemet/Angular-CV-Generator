@@ -1,7 +1,12 @@
 <nz-form-item>
-  <nz-form-label nzFor="email" nzRequired>{{ label }}</nz-form-label>
+  <nz-form-label nzRequired>{{ label }}</nz-form-label>
   <nz-input-group [nzSuffix]="icon ? suffixTemplateInfo : null">
-    <input nz-input id="email" [formControl]="formControl" [type]="type" />
+    <input
+      nz-input
+      [formControl]="formControl"
+      [type]="type"
+      [placeholder]="placeholder"
+    />
   </nz-input-group>
   <ng-template #suffixTemplateInfo>
     <span nz-icon nzType="info-circle"></span>
@@ -9,6 +14,4 @@
   <small class="validation" *ngIf="formControl.dirty">
     {{ formControl.errors | getErrorMessage }}
   </small>
-  <!-- <small class="validation"> {{ control.errors | getErrorMessage | translate }} </small> -->
-  <!-- <small class="validation"> {{ formControl.errors | json }} </small> -->
 </nz-form-item>

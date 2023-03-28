@@ -1,0 +1,29 @@
+.project__form {
+  display: flex;
+  flex-direction: column;
+}
+.project__form_row:first-child {
+  margin-top: 40px;
+}
+.project__form_row {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+  padding-left: 35px;
+}
+
+.project__form_item {
+  margin-right: 60px;
+}
+
+.project__form_item:last-child {
+  margin-right: 0;
+}
+app-input,
+app-datepicker,
+app-select {
+  width: 200px;
+}
+app-textarea {
+  width: 300px;
+}

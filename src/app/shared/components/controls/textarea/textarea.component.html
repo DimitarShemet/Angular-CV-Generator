@@ -6,6 +6,7 @@
     [formControl]="formControl"
     [placeholder]="placeholder"
   ></textarea>
-
-  <small class="validation"> {{ error$ }} </small>
+  <small class="validation" *ngIf="formControl.dirty">
+    {{ formControl.errors | getErrorMessage }}
+  </small>
 </nz-form-item>

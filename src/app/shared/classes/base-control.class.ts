@@ -13,7 +13,7 @@ import {
 })
 export class BaseControl implements ControlValueAccessor {
   @Input() type?: string = 'text';
-  @Input() placeholder: string;
+  @Input() placeholder?: string;
   @Input() label: string;
   @Input() icon?: string;
   @Input() errors?: { [key: string]: string } = {
@@ -21,6 +21,7 @@ export class BaseControl implements ControlValueAccessor {
   };
 
   formControl = new FormControl('');
+
   error$: string;
   onChange: any = () => {};
   onTouch: any = () => {};

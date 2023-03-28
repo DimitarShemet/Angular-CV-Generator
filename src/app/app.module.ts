@@ -55,6 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       useClass: AuthInterceptor,
       multi: true,
     },
+    { provide: NZ_I18N, useValue: en_US },
   ],
 })
 export class AppModule {}

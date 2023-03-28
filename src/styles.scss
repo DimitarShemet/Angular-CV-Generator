@@ -3,3 +3,25 @@
   font-family: "Roboto";
   font-style: normal;
 }
+
+.router__outlet_wrapper {
+  padding: 20px 24px 0px;
+  background-color: #e5e5e5;
+}
+.router__outlet_inner {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40.5px;
+  height: calc(100vh - 220.5px);
+}
+.validation {
+  color: red;
+}
+.projects__footer {
+  padding-top: 80px;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 44px;
+  background-color: #ffffff;
+}

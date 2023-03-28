@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { GetErrorMessagePipe } from 'src/app/shared/pipes/get-error-message.pipe';
 
 @Component({
   selector: 'app-select',
@@ -19,10 +20,15 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzFormModule,
     NzSelectModule,
     NzIconModule,
+    GetErrorMessagePipe,
   ],
 })
 export class SelectComponent extends BaseControl {
-  @Input() listOfOption: any;
+  @Input() listOfOption: any = [
+    { label: 1, value: 1 },
+    { label: 1, value: 1 },
+    { label: '', value: '' },
+  ];
   constructor(ngControl: NgControl) {
     super(ngControl);
   }

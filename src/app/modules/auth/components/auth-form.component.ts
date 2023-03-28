@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ModulePath } from 'src/app/shared/enums/routing-path.enums';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -8,7 +10,11 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./auth-form.component.scss'],
 })
 export class AuthFormComponent {
-  constructor(public fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    public fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
   form = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],
@@ -18,6 +24,7 @@ export class AuthFormComponent {
       identifier: this.form.get('username').value,
       password: this.form.get('password').value,
     });
+    this.router.navigate([ModulePath.CoreFullPath]);
   }
 
   ngOnInit() {
