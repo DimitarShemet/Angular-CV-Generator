@@ -24,7 +24,6 @@ export class AuthFormComponent {
       identifier: this.form.get('username').value,
       password: this.form.get('password').value,
     });
-    this.router.navigate([ModulePath.CoreFullPath]);
   }
 
   ngOnInit() {

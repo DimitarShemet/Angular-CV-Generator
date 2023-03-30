@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import {
@@ -16,15 +17,10 @@ import { ILogInResponse } from '../../interfaces/login-response.interface';
 export class AuthApiService {
   constructor(private http: HttpClient) {}
 
-  getToken(logInData: ILogInData) {
-    this.http
-      .post<ILogInResponse>(
-        environment.BACKEND_URL + '/api/auth/local',
-        logInData
-      )
-      .subscribe((response) => {
-        localStorage.setItem(TOKEN, response.jwt);
-        localStorage.setItem(EXPIRES, JSON.stringify(JWTExpirationTime));
-      });
+  getToken(logInData: ILogInData): Observable<ILogInResponse> {
+    return this.http.post<ILogInResponse>(
+      environment.BACKEND_URL + '/api/auth/local',
+      logInData
+    );
   }
 }

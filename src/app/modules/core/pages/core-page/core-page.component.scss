@@ -1,6 +1,5 @@
 .core__wrapper {
   display: flex;
-  padding-top: 16px;
 }
 .core__main {
   flex: 1 0 auto;
@@ -11,3 +10,7 @@ app-side-bar {
 .core__sidebar {
   display: flex;
 }
+// app-projects-page {
+//   height: calc(100vh - 136px - 48px - 20px - 40.5px + 32px + 31px);
+// }
+// -40.5px + 32px + 31px

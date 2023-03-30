@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { ModulePath, PagePath } from '../../enums/routing-path.enums';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -9,6 +11,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
   imports: [NzTableModule, CommonModule],
 })
 export class TableComponent {
+  constructor(private router: Router) {}
   listOfData = [
     {
       key: '1',
@@ -65,4 +68,8 @@ export class TableComponent {
       address: 'London No. 1 Lake Park',
     },
   ];
+
+  onClick() {
+    this.router.navigate([ModulePath.ProjectsFullPath + '/edit/' + 4]);
+  }
 }
