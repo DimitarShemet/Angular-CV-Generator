@@ -18,18 +18,23 @@
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
   background-color: #fff;
 }
-// .ant-spin-container {
-//   height: calc(100vh - 136px - 48px - 20px - 40.5px + 32px + -122px);
-//   display: flex;
-//   flex-direction: column;
-// }
-// .ant-table {
-//   flex: 1;
-// }
-// .ant-table-pagination.ant-pagination {
-//   margin: 0;
-// }
-
+nz-spin {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.ant-spin-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.ant-table {
+  flex: 1 0 auto;
+}
+.ant-table-content {
+  height: 400px;
+  overflow-y: auto;
+}
 // Override less variables to here
 // View all variables: https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/style/themes/default.less
 

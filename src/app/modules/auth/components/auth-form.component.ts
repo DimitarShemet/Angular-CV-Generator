@@ -10,11 +10,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./auth-form.component.scss'],
 })
 export class AuthFormComponent {
-  constructor(
-    public fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(public fb: FormBuilder, private authService: AuthService) {}
   form = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],

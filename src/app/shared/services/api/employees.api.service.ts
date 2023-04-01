@@ -9,7 +9,7 @@ export class EmployeesApiService {
   constructor(private http: HttpClient) {}
   getEmployees() {
     this.http
-      .get(environment.BACKEND_URL + '/api/users')
+      .get(environment.BACKEND_URL + '/api/projects?populate=*')
       .subscribe((response) => {
         console.log(response);
       });

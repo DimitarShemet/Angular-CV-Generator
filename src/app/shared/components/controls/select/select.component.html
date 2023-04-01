@@ -4,6 +4,7 @@
     [formControl]="formControl"
     [nzPlaceHolder]="placeholder"
     [nzShowArrow]="false"
+    [nzMode]="multiselection ? 'multiple' : 'default'"
   >
     <nz-option
       *ngFor="let option of listOfOption"

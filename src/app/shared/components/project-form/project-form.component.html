@@ -2,7 +2,7 @@
   <div class="project__form_row">
     <app-input
       formControlName="name"
-      placeholder="type your name"
+      placeholder="type name of project"
       label="Name"
       class="project__form_item"
     ></app-input>
@@ -19,37 +19,36 @@
   </div>
   <div class="project__form_row">
     <app-input
-      formControlName="teamSize"
-      placeholder="type team size"
-      label="Team size"
+      formControlName="domain"
+      placeholder="domain"
+      label="Domain"
       class="project__form_item"
     ></app-input>
-
-    <app-select
-      formControlName="techStack"
-      placeholder="Tech stack"
+    <app-input
+      formControlName="internalName"
+      placeholder=" type internalName"
+      label="InternalName"
       class="project__form_item"
-      label="Tech stack"
-    ></app-select>
+    ></app-input>
     <app-select
-      formControlName="roles"
-      placeholder="Roles"
+      formControlName="skills"
+      placeholder="Type skills"
       class="project__form_item"
-      label="Roles"
+      label="Skills"
     ></app-select>
   </div>
   <div class="project__form_row">
     <app-textarea
       formControlName="description"
       label="Description"
-      placeholder="Autosize height based on content lines"
+      placeholder="type description of project"
       class="project__form_item"
     ></app-textarea>
-    <app-textarea
+    <app-select
       formControlName="responsibilities"
-      label="Responsibilities"
-      placeholder="Autosize height based on content lines"
+      placeholder="Responsibilities"
       class="project__form_item"
-    ></app-textarea>
+      label="Responsibilities"
+    ></app-select>
   </div>
 </form>

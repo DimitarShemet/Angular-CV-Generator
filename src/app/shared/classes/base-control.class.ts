@@ -2,9 +2,12 @@ import { Directive, Input } from '@angular/core';
 
 import {
   ControlValueAccessor,
+  FormArray,
   FormControl,
+  FormGroup,
   NgControl,
   ValidationErrors,
+  Validators,
 } from '@angular/forms';
 
 @Directive({
@@ -12,6 +15,7 @@ import {
   standalone: true,
 })
 export class BaseControl implements ControlValueAccessor {
+  @Input() multiselection? = true;
   @Input() type?: string = 'text';
   @Input() placeholder?: string;
   @Input() label: string;
@@ -20,8 +24,7 @@ export class BaseControl implements ControlValueAccessor {
     required: 'Please, specify the field',
   };
 
-  formControl = new FormControl('');
-
+  formControl: any = new FormControl('');
   error$: string;
   onChange: any = () => {};
   onTouch: any = () => {};
@@ -30,7 +33,7 @@ export class BaseControl implements ControlValueAccessor {
     this.ngControl.valueAccessor = this;
   }
 
-  writeValue(value: string) {
+  writeValue(value: any) {
     this.formControl.setValue(value);
   }
   registerOnChange(fn: Function) {
@@ -45,7 +48,7 @@ export class BaseControl implements ControlValueAccessor {
   }
 
   ngOnInit() {
-    this.formControl.valueChanges.subscribe((val) => {
+    this.formControl.valueChanges.subscribe((val: any) => {
       this.onChange(val);
     });
 

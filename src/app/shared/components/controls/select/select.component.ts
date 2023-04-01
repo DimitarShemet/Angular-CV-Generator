@@ -1,5 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { NgControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  NgControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { BaseControl } from '../../../classes/base-control.class';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { CommonModule } from '@angular/common';
@@ -26,7 +32,8 @@ import { GetErrorMessagePipe } from 'src/app/shared/pipes/get-error-message.pipe
 export class SelectComponent extends BaseControl {
   @Input() listOfOption: any = [
     { label: 1, value: 1 },
-    { label: 1, value: 1 },
+    { label: 2, value: 2 },
+    { label: 3, value: 3 },
     { label: '', value: '' },
   ];
   constructor(ngControl: NgControl) {

@@ -7,11 +7,15 @@
 .router__outlet_wrapper {
   padding: 20px 24px 0px;
   background-color: #e5e5e5;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .router__outlet_inner {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
+  height: 100%;
   padding-top: 40.5px;
 }
 .validation {

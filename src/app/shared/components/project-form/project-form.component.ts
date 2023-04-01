@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
@@ -23,6 +24,7 @@ import { TextareaComponent } from '../controls/textarea/textarea.component';
     SelectComponent,
     TextareaComponent,
   ],
+  // подумать насчёт передкли форму проекта под cve
 })
 export class ProjectFormComponent {
   projectForm: FormGroup;
@@ -31,11 +33,11 @@ export class ProjectFormComponent {
       name: ['', [Validators.required]],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
-      teamSize: ['', [Validators.required]],
-      techStack: ['', [Validators.required]],
-      roles: ['', [Validators.required]],
+      domain: ['', [Validators.required]],
+      internalName: ['', [Validators.required]],
+      skills: [[], [Validators.required]],
+      responsibilities: [[], Validators.required],
       description: ['', [Validators.required]],
-      responsibilities: ['', [Validators.required]],
     });
   }
 

@@ -1,7 +1,14 @@
+:host {
+  height: 136px;
+  display: block;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
 nav {
   display: flex;
   flex-direction: column;
-  height: 136px;
+
   background-color: #ffffff;
   padding: 16px 0px;
   justify-content: space-between;
@@ -11,4 +18,5 @@ nav {
 .module__name {
   font-weight: 500;
   font-size: 20px;
+  padding: 16px 0;
 }
