@@ -1,8 +1,24 @@
 <div class="router__outlet_wrapper">
   <div class="router__outlet_inner">
-    <button nz-button nzType="primary" (click)="addProject()">
+    <button nz-button nzType="primary" (click)="openCreatePage()">
       Add project
     </button>
-    <app-table></app-table>
+
+    <app-table
+      [tableData]="projects"
+      [tableHeader]="[
+        'Name',
+        'InternalName',
+        'Domain',
+        'Skills',
+        'Responsibilities'
+      ]"
+      firstColumn="name"
+      secondColumn="internalName"
+      thirdColumn="domain"
+      fourColumn="skills"
+      fifthColumn="responsibilities"
+      (sendId)="openEditPage($event)"
+    ></app-table>
   </div>
 </div>

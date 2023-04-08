@@ -7,3 +7,13 @@ button {
   align-self: flex-end;
   margin-right: 25px;
 }
+.project__form {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}

@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { ModulePath, PagePath } from 'src/app/shared/enums/routing-path.enums';
+import { IProject } from 'src/app/shared/interfaces/project-data.interface';
+import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.service';
+import { LoadProjects } from 'src/app/store/actions/projects-actions';
 
 @Component({
   selector: 'app-projects-page',
@@ -8,11 +12,33 @@ import { ModulePath, PagePath } from 'src/app/shared/enums/routing-path.enums';
   styleUrls: ['./projects-page.component.scss'],
 })
 export class ProjectsPageComponent {
-  constructor(private router: Router) {}
+  projects: IProject[];
 
-  addProject() {
+  constructor(
+    private router: Router,
+    private projectsApiService: ProjectsApiService,
+    private store: Store
+  ) {}
+
+  ngOnInit() {
+    this.projectsApiService.getProjects().subscribe((projects: IProject[]) => {
+      this.projects = projects;
+      this.store.dispatch(new LoadProjects({ projects: this.projects }));
+    });
+  }
+
+  openCreatePage() {
     this.router.navigate([
       ModulePath.ProjectsFullPath + PagePath.ProjectCreateFullPath,
+    ]);
+  }
+
+  openEditPage(id: number) {
+    console.log(
+      ModulePath.ProjectsFullPath + PagePath.ProjectEditFullPath + id
+    );
+    this.router.navigate([
+      ModulePath.ProjectsFullPath + PagePath.ProjectEditFullPath + id,
     ]);
   }
 }

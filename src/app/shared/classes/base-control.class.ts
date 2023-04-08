@@ -29,7 +29,7 @@ export class BaseControl implements ControlValueAccessor {
   onChange: any = () => {};
   onTouch: any = () => {};
 
-  constructor(private ngControl: NgControl) {
+  constructor(protected ngControl: NgControl) {
     this.ngControl.valueAccessor = this;
   }
 

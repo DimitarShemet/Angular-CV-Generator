@@ -30,12 +30,8 @@ import { GetErrorMessagePipe } from 'src/app/shared/pipes/get-error-message.pipe
   ],
 })
 export class SelectComponent extends BaseControl {
-  @Input() listOfOption: any = [
-    { label: 1, value: 1 },
-    { label: 2, value: 2 },
-    { label: 3, value: 3 },
-    { label: '', value: '' },
-  ];
+  @Input() listOfOption: any;
+
   constructor(ngControl: NgControl) {
     super(ngControl);
   }

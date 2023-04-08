@@ -8,6 +8,7 @@ import { TableComponent } from 'src/app/shared/components/table/table.component'
 import { ProjectFormComponent } from 'src/app/shared/components/project-form/project-form.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,10 +19,11 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   imports: [
     CommonModule,
     ProjectsRoutingModule,
-    TableComponent,
     ProjectFormComponent,
     TranslateModule,
     NzButtonModule,
+    ReactiveFormsModule,
+    TableComponent,
   ],
 })
 export class ProjectsModule {}

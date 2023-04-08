@@ -8,11 +8,11 @@
   display: flex;
   flex-direction: column;
   width: 208px;
-  margin-left: 16px;
   transition: width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
 }
 .wrapper__collapsed {
-  width: 80px;
+  width: 50px;
+  padding-left: 0px;
 }
 button {
   margin-bottom: 12px;
@@ -22,6 +22,9 @@ ul {
 }
 .sidebar__footer {
   height: 40px;
+  .icon {
+    margin-left: 17px;
+  }
 }
 nz-divider {
   margin-bottom: 5px;

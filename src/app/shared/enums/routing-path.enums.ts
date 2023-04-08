@@ -27,7 +27,7 @@ export enum PagePath {
   EmployeesFullPath = '/',
   ProjectsFullPath = '/',
   EmployeeCreateFullPath = '/create',
-  EmployeeEditFullPath = '/edit/:id',
+  EmployeeEditFullPath = '/edit/',
   ProjectCreateFullPath = '/create',
-  ProjectEditFullPath = '/edit/:id',
+  ProjectEditFullPath = '/edit/',
 }

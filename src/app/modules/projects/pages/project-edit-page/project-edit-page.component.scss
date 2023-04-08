@@ -8,3 +8,9 @@ button {
   align-self: flex-end;
   margin-right: 25px;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}

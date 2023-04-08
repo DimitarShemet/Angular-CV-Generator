@@ -1,20 +1,28 @@
-<nz-table #basicTable [nzData]="listOfData" [nzPageSize]="8">
+<nz-table #basicTable [nzData]="tableData" [nzPageSize]="8">
   <thead>
     <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Department</th>
-      <th>Specialization</th>
+      <th *ngFor="let elem of tableHeader">{{ elem }}</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of basicTable.data">
-      <td>{{ data.name }}</td>
-      <td>{{ data.age }}</td>
-      <td>{{ data.address }}</td>
-      <td>{{ data.address }}</td>
-      <td>{{ data.name }}</td>
+    <tr
+      *ngFor="let elem of basicTable.data; index as i"
+      (click)="onClick(elem.id)"
+    >
+      <td>
+        <!-- <a [routerLink]="[tableItemLink, elem.id]" -->
+        {{ elem.attributes[firstColumn] }}
+      </td>
+      <td>
+        {{ elem.attributes[secondColumn] }}
+      </td>
+      <td>{{ elem.attributes[thirdColumn] }}</td>
+      <td>{{ elem.attributes[fourColumn] | getArrayItem : skillsOption }}</td>
+      <td>
+        {{
+          elem.attributes[fifthColumn] | getArrayItem : responsibilitiesOption
+        }}
+      </td>
     </tr>
   </tbody>
 </nz-table>

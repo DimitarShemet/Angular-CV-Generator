@@ -25,9 +25,11 @@
   margin-right: 0;
 }
 app-input,
-app-datepicker,
-app-select {
+app-datepicker {
   width: 200px;
+}
+app-select {
+  width: 250px;
 }
 app-textarea {
   width: 27.7%;
