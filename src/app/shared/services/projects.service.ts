@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IProject } from '../interfaces/project-data.interface';
+import { IProject } from '../interfaces/project.interface';
 import { ProjectsApiService } from './api/projects.api.service';
 import { Observable, map } from 'rxjs';
 
@@ -17,27 +17,27 @@ export class ProjectsService {
       }, 0) + 1
     );
   }
-  formatProjectsResponse(projects: IProject[]): Array<any> {
-    return projects.map((elem) => ({
+  formatProjectsResponse(projects: any): Array<any> {
+    return projects.map((elem: any) => ({
       ...elem,
       attributes: {
         ...elem.attributes,
         responsibilities: elem.attributes.responsibilities.data.map(
-          (elem) => elem.id
+          (elem: any) => elem.id
         ),
-        skills: elem.attributes.skills.data.map((elem) => elem.id),
+        skills: elem.attributes.skills.data.map((elem: any) => elem.id),
       },
     }));
   }
-  formatProjectResponse(project: IProject): any {
+  formatProjectResponse(project: any): any {
     return {
       ...project,
       attributes: {
         ...project.attributes,
         responsibilities: project.attributes.responsibilities.data.map(
-          (elem) => elem.id
+          (elem: any) => elem.id
         ),
-        skills: project.attributes.skills.data.map((elem) => elem.id),
+        skills: project.attributes.skills.data.map((elem: any) => elem.id),
       },
     };
   }

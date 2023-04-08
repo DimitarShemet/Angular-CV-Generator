@@ -6,7 +6,7 @@ import {
   IProject,
   IProjectResponse,
   IProjectsResponse,
-} from '../../interfaces/project-data.interface';
+} from '../../interfaces/project.interface';
 import { ProjectsService } from '../projects.service';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class ProjectsApiService {
     });
   }
 
-  changeProject(id: number, project: IProject) {
+  editProject(id: number, project: IProject) {
     return this.http
       .put(environment.BACKEND_URL + '/api/projects/' + id + '?populate=*', {
         data: project,

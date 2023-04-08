@@ -24,12 +24,6 @@
     ></app-input>
   </div>
   <div class="project__form_row">
-    <app-input
-      formControlName="internalName"
-      placeholder=" type internalName"
-      label="InternalName"
-      class="project__form_item"
-    ></app-input>
     <app-select
       [listOfOption]="skillsOption"
       formControlName="skills"
@@ -44,6 +38,12 @@
       class="project__form_item"
       label="Responsibilities"
     ></app-select>
+    <app-input
+      formControlName="internalName"
+      placeholder=" type internalName"
+      label="InternalName"
+      class="project__form_item"
+    ></app-input>
   </div>
   <div class="project__form_row">
     <app-textarea

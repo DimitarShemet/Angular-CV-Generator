@@ -1,9 +1,13 @@
 import { Action } from '@ngrx/store';
-import { IProject } from 'src/app/shared/interfaces/project-data.interface';
+import {
+  IProject,
+  IProjectAttributes,
+} from 'src/app/shared/interfaces/project.interface';
 
 export enum ProjectsActionsTypes {
-  AddProject = '[Projects] add Project',
   LoadProjects = '[Projects] Load Projects',
+  AddProject = '[Projects] add Project',
+  EditProject = '[Projects] Edit Project',
 }
 export class LoadProjects implements Action {
   readonly type = ProjectsActionsTypes.LoadProjects;
@@ -15,4 +19,11 @@ export class AddProject implements Action {
   constructor(public payload: { project: IProject }) {}
 }
 
-export type ProjectsActions = AddProject | LoadProjects;
+export class EditProject implements Action {
+  readonly type = ProjectsActionsTypes.EditProject;
+  constructor(
+    public payload: { id: number; projectAttributes: IProjectAttributes }
+  ) {}
+}
+
+export type ProjectsActions = AddProject | LoadProjects | EditProject;

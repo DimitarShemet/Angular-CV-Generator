@@ -5,10 +5,12 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { IProject } from 'src/app/shared/interfaces/project-data.interface';
+import { PagePath } from 'src/app/shared/enums/routing-path.enums';
+import { IProject } from 'src/app/shared/interfaces/project.interface';
 import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.service';
+import { EditProject } from 'src/app/store/actions/projects-actions';
 import { projectsSelector } from 'src/app/store/reducers/projects.reducer';
 
 @Component({
@@ -25,7 +27,8 @@ export class ProjectEditPageComponent {
     fb: FormBuilder,
     private projectsApiService: ProjectsApiService,
     private route: ActivatedRoute,
-    private store: Store
+    private store: Store,
+    private router: Router
   ) {
     this.form = fb.group({
       projectForm: [null, Validators.required],
@@ -36,25 +39,28 @@ export class ProjectEditPageComponent {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
     });
-    // this.projectsApiService
-    //   .getProject(this.id)
-    //   .subscribe((response: IProject) => {
-    //     this.form.get('projectForm').patchValue(response.attributes);
-    //   });
 
-    this.store.pipe(select(projectsSelector)).subscribe((projectsState) => {
-      const project = projectsState.find(
-        (project) => project.id === this.id
-      ).attributes;
+    this.projectsApiService
+      .getProject(this.id)
+      .subscribe((response: IProject) => {
+        this.form.get('projectForm').patchValue(response.attributes);
+      });
 
-      this.form.get('projectForm').patchValue(project);
-    });
+    // this.store.pipe(select(projectsSelector)).subscribe((projectsState) => {
+    //   const project = projectsState.find(
+    //     (project) => project.id === this.id
+    //   ).attributes;
+
+    //   this.form.get('projectForm').patchValue(project);
+    // });
   }
 
   submitForm() {
-    this.projectsApiService.changeProject(
-      this.id,
-      this.form.get('projectForm').value
+    const formValue = this.form.get('projectForm').value;
+    this.projectsApiService.editProject(this.id, formValue);
+    this.store.dispatch(
+      new EditProject({ id: this.id, projectAttributes: formValue })
     );
+    this.router.navigate([PagePath.ProjectsFullPath]);
   }
 }

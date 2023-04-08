@@ -8,6 +8,4 @@ import { EmployeesApiService } from 'src/app/shared/services/api/employees.api.s
 })
 export class AuthPageComponent {
   constructor() {}
-  // private EmployeesApiService: EmployeesApiService
-  // this.EmployeesApiService.getEmployees();
 }

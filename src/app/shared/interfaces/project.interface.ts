@@ -1,7 +1,11 @@
 import { IResponsibilities } from './responsibilities.interface';
 import { ISkills } from './skills.interface';
 
-export interface IProjectDataAttributes {
+export interface IProject {
+  id?: number;
+  attributes: IProjectAttributes;
+}
+export interface IProjectAttributes {
   name: string;
   description: string;
   domain: string;
@@ -11,13 +15,11 @@ export interface IProjectDataAttributes {
   skills: ISkills;
   responsibilities: IResponsibilities;
 }
-export interface IProject {
-  id?: number;
-  attributes: IProjectDataAttributes;
-}
+
 export interface IProjectsResponse {
   data: IProject[];
 }
+
 export interface IProjectResponse {
   data: IProject;
 }

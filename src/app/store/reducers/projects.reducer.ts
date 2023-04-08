@@ -14,16 +14,32 @@ export const projectsReducer = (
   action: ProjectsActions
 ): IProjectsState => {
   switch (action.type) {
+    case ProjectsActionsTypes.LoadProjects:
+      return {
+        ...state,
+        projects: [...action.payload.projects],
+      };
+
     case ProjectsActionsTypes.AddProject:
       return {
         ...state,
         projects: [...state.projects, action.payload.project],
       };
 
-    case ProjectsActionsTypes.LoadProjects:
+    case ProjectsActionsTypes.EditProject:
+      const updatedProjects = [...state.projects];
+      const projectIndex = updatedProjects.findIndex(
+        (elem) => elem.id === action.payload.id
+      );
+
+      updatedProjects[projectIndex] = {
+        ...updatedProjects[projectIndex],
+        attributes: action.payload.projectAttributes,
+      };
+
       return {
         ...state,
-        projects: [...action.payload.projects],
+        projects: updatedProjects,
       };
 
     default:

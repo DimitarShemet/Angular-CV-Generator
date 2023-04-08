@@ -1,4 +1,4 @@
-import { IProject } from './project-data.interface';
+import { IProject } from './project.interface';
 
 export interface IProjectsState {
   projects: Array<IProject>;

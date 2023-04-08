@@ -4,7 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { ModulePath } from '../../enums/routing-path.enums';
 import { PagePath } from '../../enums/routing-path.enums';
-import { IProject } from '../../interfaces/project-data.interface';
+import { IProject } from '../../interfaces/project.interface';
 import { GetArrayItemPipe } from '../../pipes/get-array-item.pipe';
 
 @Component({

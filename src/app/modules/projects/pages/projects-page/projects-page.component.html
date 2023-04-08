@@ -1,6 +1,6 @@
 <div class="router__outlet_wrapper">
   <div class="router__outlet_inner">
-    <button nz-button nzType="primary" (click)="openCreatePage()">
+    <button nz-button nzType="primary" (click)="openProjectCreatePage()">
       Add project
     </button>
 
@@ -18,7 +18,7 @@
       thirdColumn="domain"
       fourColumn="skills"
       fifthColumn="responsibilities"
-      (sendId)="openEditPage($event)"
+      (sendId)="openProjectEditPage($event)"
     ></app-table>
   </div>
 </div>

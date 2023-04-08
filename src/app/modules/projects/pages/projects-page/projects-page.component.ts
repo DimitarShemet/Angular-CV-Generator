@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ModulePath, PagePath } from 'src/app/shared/enums/routing-path.enums';
-import { IProject } from 'src/app/shared/interfaces/project-data.interface';
+import { IProject } from 'src/app/shared/interfaces/project.interface';
 import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.service';
 import { LoadProjects } from 'src/app/store/actions/projects-actions';
 
@@ -27,13 +27,13 @@ export class ProjectsPageComponent {
     });
   }
 
-  openCreatePage() {
+  openProjectCreatePage() {
     this.router.navigate([
       ModulePath.ProjectsFullPath + PagePath.ProjectCreateFullPath,
     ]);
   }
 
-  openEditPage(id: number) {
+  openProjectEditPage(id: number) {
     console.log(
       ModulePath.ProjectsFullPath + PagePath.ProjectEditFullPath + id
     );

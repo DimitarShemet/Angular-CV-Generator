@@ -11,17 +11,26 @@
       nzTooltipPlacement="right"
       [nzTooltipTitle]="isCollapsed ? 'Dashboard' : ''"
       nzSelected
+      routerLinkActive="active"
     >
       <span nz-icon nzType="dashboard" nzTheme="outline"></span>
-      <span><a routerLink="dashboard">Dashboard</a></span>
+      <span
+        ><a routerLink="dashboard" routerLinkActive="active">Dashboard</a></span
+      >
     </li>
-    <li nz-menu-item nzTitle="Employees">
+    <li nz-menu-item nzTitle="Employees" routerLinkActive="active">
       <span nz-icon nzType="form" nzTheme="outline"></span>
-      <span><a routerLink="employees">Employees</a></span>
+      <span
+        ><a routerLink="/employees" routerLinkActive="active"
+          >Employees</a
+        ></span
+      >
     </li>
-    <li nz-menu-item nzTitle="Projects">
+    <li nz-menu-item nzTitle="Projects" routerLinkActive="active">
       <span nz-icon nzType="database" nzTheme="outline"></span>
-      <span><a routerLink="projects">Projects</a></span>
+      <span
+        ><a routerLink="projects" routerLinkActive="active">Projects</a></span
+      >
     </li>
   </ul>
   <div class="sidebar__footer">

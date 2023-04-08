@@ -5,16 +5,18 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import {
   IProject,
-  IProjectDataAttributes,
-} from 'src/app/shared/interfaces/project-data.interface';
+  IProjectAttributes,
+} from 'src/app/shared/interfaces/project.interface';
 import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
-import { AddProject } from 'src/app/store/actions/projects-actions';
-import { projectsSelector } from 'src/app/store/reducers/projects.reducer';
+import {
+  AddProject,
+  LoadProjects,
+} from 'src/app/store/actions/projects-actions';
 
 @Component({
   selector: 'app-project-create-page',
@@ -38,13 +40,10 @@ export class ProjectCreatePageComponent {
   }
 
   ngOnInit() {
-    this.store.pipe(select(projectsSelector)).subscribe((projectsState) => {
-      this.projects = projectsState;
-      console.log(this.projects);
+    this.projectsApiService.getProjects().subscribe((projects: IProject[]) => {
+      this.projects = projects;
+      this.store.dispatch(new LoadProjects({ projects: this.projects }));
     });
-    // this.projectsApiService.getProjects().subscribe((projects: IProject[]) => {
-    //   this.projects = projects;
-    // });
   }
 
   submitForm() {
@@ -52,8 +51,7 @@ export class ProjectCreatePageComponent {
       new AddProject({
         project: {
           id: this.projectsService.getNewId(this.projects),
-          attributes: this.form.get('projectForm')
-            .value as IProjectDataAttributes,
+          attributes: this.form.get('projectForm').value as IProjectAttributes,
         },
       })
     );
@@ -61,5 +59,6 @@ export class ProjectCreatePageComponent {
     this.projectsApiService
       .addProject(this.form.get('projectForm').value)
       .subscribe((answer) => console.log(answer));
+    this.form.reset();
   }
 }
