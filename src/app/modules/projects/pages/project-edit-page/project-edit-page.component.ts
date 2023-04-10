@@ -5,13 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { PagePath } from 'src/app/shared/enums/routing-path.enums';
-import { IProject } from 'src/app/shared/interfaces/project.interface';
 import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.service';
 import { EditProject } from 'src/app/store/actions/projects-actions';
-import { projectsSelector } from 'src/app/store/reducers/projects.reducer';
 
 @Component({
   selector: 'app-project-edit-page',
@@ -36,23 +34,10 @@ export class ProjectEditPageComponent {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
+    this.route.data.subscribe((data) => {
+      this.form.get('projectForm').patchValue(data['project'].attributes);
+      this.id = data['project'].id;
     });
-
-    this.projectsApiService
-      .getProject(this.id)
-      .subscribe((response: IProject) => {
-        this.form.get('projectForm').patchValue(response.attributes);
-      });
-
-    // this.store.pipe(select(projectsSelector)).subscribe((projectsState) => {
-    //   const project = projectsState.find(
-    //     (project) => project.id === this.id
-    //   ).attributes;
-
-    //   this.form.get('projectForm').patchValue(project);
-    // });
   }
 
   submitForm() {

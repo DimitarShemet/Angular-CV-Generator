@@ -1,1 +1,7 @@
-<span>bread-crumbs works!</span>
+<ul class="breadcrumb">
+  <li *ngFor="let breadcrumb of breadcrumbs">
+    <a [routerLink]="breadcrumb.url" routerLinkActive="router-link-active">
+      {{ breadcrumb.label }}
+    </a>
+  </li>
+</ul>

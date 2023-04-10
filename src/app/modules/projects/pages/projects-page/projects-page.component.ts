@@ -34,9 +34,6 @@ export class ProjectsPageComponent {
   }
 
   openProjectEditPage(id: number) {
-    console.log(
-      ModulePath.ProjectsFullPath + PagePath.ProjectEditFullPath + id
-    );
     this.router.navigate([
       ModulePath.ProjectsFullPath + PagePath.ProjectEditFullPath + id,
     ]);

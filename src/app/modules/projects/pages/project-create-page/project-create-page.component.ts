@@ -5,7 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { PagePath } from 'src/app/shared/enums/routing-path.enums';
 
 import {
   IProject,
@@ -32,7 +34,8 @@ export class ProjectCreatePageComponent {
     fb: FormBuilder,
     private projectsApiService: ProjectsApiService,
     private projectsService: ProjectsService,
-    public store: Store
+    public store: Store,
+    private router: Router
   ) {
     this.form = fb.group({
       projectForm: [null, Validators.required],
@@ -59,6 +62,7 @@ export class ProjectCreatePageComponent {
     this.projectsApiService
       .addProject(this.form.get('projectForm').value)
       .subscribe((answer) => console.log(answer));
-    this.form.reset();
+
+    this.router.navigate([PagePath.ProjectsFullPath]);
   }
 }

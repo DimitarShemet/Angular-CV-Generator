@@ -1,9 +1,41 @@
-span {
-  font-weight: 400;
-  font-size: 14px;
-}
 :host {
   display: block;
   width: 100%;
   height: 100%;
+}
+.breadcrumb {
+  padding-inline-start: 0;
+  margin-bottom: 0px;
+
+  a {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: inherit;
+  }
+
+  a:hover {
+    color: dimgrey;
+    text-decoration: none;
+  }
+
+  li {
+    list-style: none;
+    display: inline;
+    color: #8c8c8c;
+  }
+
+  li:last-child {
+    color: #000000;
+  }
+
+  li::after {
+    content: "/";
+    color: #8c8c8c;
+    margin: 0 8px;
+  }
+
+  li:last-child::after {
+    content: "";
+  }
 }

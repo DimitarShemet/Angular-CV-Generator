@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AuthInterceptor } from 'src/app/shared/interceptors/auth.interceptor';
 import { AuthApiService } from 'src/app/shared/services/api/auth.api.service';
 
-import { BreadCrumbsComponent } from './components/bread-crumbs/bread-crumbs.component';
+import { BreadcrumbComponents } from './components/bread-crumbs/bread-crumbs.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavComponent } from './components/nav/nav.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
@@ -20,7 +20,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
   declarations: [
     SideBarComponent,
     NavComponent,
-    BreadCrumbsComponent,
+    BreadcrumbComponents,
     HeaderComponent,
     CorePageComponent,
   ],

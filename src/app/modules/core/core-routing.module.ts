@@ -7,6 +7,9 @@ const routes: Routes = [
   {
     path: PagePath.Core,
     component: CorePageComponent,
+    data: {
+      breadcrumb: 'Home',
+    },
     children: [
       {
         path: ModulePath.Dashboard,
@@ -14,6 +17,9 @@ const routes: Routes = [
           import('../dashboard/dashboard.module').then(
             (m) => m.DashboardModule
           ),
+        data: {
+          breadcrumb: 'Dashboard',
+        },
       },
       {
         path: ModulePath.Employees,
@@ -21,13 +27,22 @@ const routes: Routes = [
           import('../employees/employees.module').then(
             (m) => m.EmployeesModule
           ),
+        data: {
+          breadcrumb: 'Employees',
+        },
       },
       {
         path: ModulePath.Projects,
         loadChildren: () =>
           import('../projects/projects.module').then((m) => m.ProjectsModule),
+        data: {
+          breadcrumb: 'Projects',
+        },
       },
-      { path: '**', redirectTo: ModulePath.Projects },
+      {
+        path: '**',
+        redirectTo: ModulePath.Projects,
+      },
     ],
   },
 ];

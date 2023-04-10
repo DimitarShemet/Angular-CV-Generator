@@ -9,6 +9,7 @@ const routes: Routes = [
   {
     path: PagePath.Employees,
     component: EmployeesPageComponent,
+    data: { breadCrumb: '' },
   },
   {
     path: PagePath.EmployeeCreate,
