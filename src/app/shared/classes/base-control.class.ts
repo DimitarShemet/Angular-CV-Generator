@@ -20,12 +20,9 @@ export class BaseControl implements ControlValueAccessor {
   @Input() placeholder?: string;
   @Input() label: string;
   @Input() icon?: string;
-  @Input() errors?: { [key: string]: string } = {
-    required: 'Please, specify the field',
-  };
 
   formControl: any = new FormControl('');
-  error$: string;
+
   onChange: any = () => {};
   onTouch: any = () => {};
 

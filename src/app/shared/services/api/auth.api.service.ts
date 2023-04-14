@@ -18,8 +18,4 @@ export class AuthApiService {
       logInData
     );
   }
-
-  getProjects() {
-    this.http.get(environment.BACKEND_URL + '/api/projects?populate=*');
-  }
 }

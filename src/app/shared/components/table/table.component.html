@@ -9,19 +9,9 @@
       *ngFor="let elem of basicTable.data; index as i"
       (click)="onClick(elem.id)"
     >
-      <td>
-        <!-- <a [routerLink]="[tableItemLink, elem.id]" -->
-        {{ elem.attributes[firstColumn] }}
-      </td>
-      <td>
-        {{ elem.attributes[secondColumn] }}
-      </td>
-      <td>{{ elem.attributes[thirdColumn] }}</td>
-      <td>{{ elem.attributes[fourColumn] | getArrayItem : skillsOption }}</td>
-      <td>
-        {{
-          elem.attributes[fifthColumn] | getArrayItem : responsibilitiesOption
-        }}
+      <!-- // id можем быть с большой, может быть с маленькой -->
+      <td *ngFor="let column of tableColumns">
+        {{ elem.attributes[column] }}
       </td>
     </tr>
   </tbody>

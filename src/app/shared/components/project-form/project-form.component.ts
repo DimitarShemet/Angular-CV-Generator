@@ -14,6 +14,7 @@ import { SelectComponent } from '../controls/select/select.component';
 import { TextareaComponent } from '../controls/textarea/textarea.component';
 import { ProjectsApiService } from '../../services/api/projects.api.service';
 import { BaseControl } from '../../classes/base-control.class';
+import { ISelectOptions } from '../../interfaces/label-options.interface';
 
 @Component({
   selector: 'app-project-form',
@@ -30,16 +31,9 @@ import { BaseControl } from '../../classes/base-control.class';
   ],
 })
 export class ProjectFormComponent extends BaseControl {
-  skillsOption: any = [
-    { label: 'Vue', value: 1 },
-    { label: 'javaScript', value: 2 },
-    { label: 'Angular', value: 3 },
-  ];
-  responsibilitiesOption: any = [
-    { label: 'общение с заказчиком', value: 1 },
-    { label: 'дейлики', value: 2 },
-    { label: 'back api', value: 3 },
-  ];
+  @Input() skillsOption: ISelectOptions;
+  @Input() responsibilitiesOption: ISelectOptions;
+
   constructor(private fb: FormBuilder, override ngControl: NgControl) {
     super(ngControl);
   }
@@ -47,6 +41,7 @@ export class ProjectFormComponent extends BaseControl {
   override ngOnInit(): void {
     super.ngOnInit();
     this.ngControl.control.setValidators(this.validate.bind(this));
+    // разобраться до конца с этой строчкой; нужен ли validars requyired наверху, нужна ли форма наверху?
   }
 
   validate(): ValidationErrors | null {

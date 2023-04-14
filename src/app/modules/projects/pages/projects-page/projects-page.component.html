@@ -5,19 +5,21 @@
     </button>
 
     <app-table
-      [tableData]="projects"
+      [tableData]="projects$ | async"
       [tableHeader]="[
         'Name',
         'InternalName',
         'Domain',
-        'Skills',
-        'Responsibilities'
+        'Description',
+        'Skills'
       ]"
-      firstColumn="name"
-      secondColumn="internalName"
-      thirdColumn="domain"
-      fourColumn="skills"
-      fifthColumn="responsibilities"
+      [tableColumns]="[
+        'name',
+        'internalName',
+        'domain',
+        'description',
+        'skills'
+      ]"
       (sendId)="openProjectEditPage($event)"
     ></app-table>
   </div>

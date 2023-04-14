@@ -1,17 +1,23 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IEmployee } from '../../interfaces/employee.interface';
+import { FormatService } from '../format.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmployeesApiService {
-  constructor(private http: HttpClient) {}
-  getEmployees() {
-    this.http
-      .get(environment.BACKEND_URL + '/api/projects?populate=*')
-      .subscribe((response) => {
-        console.log(response);
-      });
+  constructor(private http: HttpClient, private formatService: FormatService) {}
+  getEmployees(): Observable<IEmployee[]> {
+    return this.http
+      .get<Array<any>>(environment.BACKEND_URL + '/api/users?populate=*')
+      .pipe(
+        map((employees: Array<any>) => {
+          console.log(employees);
+          return this.formatService.formatEmployeesResponse(employees);
+        })
+      );
   }
 }

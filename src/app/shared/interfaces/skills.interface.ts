@@ -1,1 +1,1 @@
-export type ISkills = Array<number>;
+export type ISkills = number[];

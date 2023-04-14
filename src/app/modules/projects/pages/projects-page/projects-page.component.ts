@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { ModulePath, PagePath } from 'src/app/shared/enums/routing-path.enums';
 import { IProject } from 'src/app/shared/interfaces/project.interface';
 import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.service';
-import { LoadProjects } from 'src/app/store/actions/projects-actions';
+import { FormatService } from 'src/app/shared/services/format.service';
+import { loadProjects } from 'src/app/store/actions/projects-actions';
+import { projectsSelector } from 'src/app/store/selectors/projects-selectors';
 
 @Component({
   selector: 'app-projects-page',
@@ -12,19 +15,11 @@ import { LoadProjects } from 'src/app/store/actions/projects-actions';
   styleUrls: ['./projects-page.component.scss'],
 })
 export class ProjectsPageComponent {
-  projects: IProject[];
-
-  constructor(
-    private router: Router,
-    private projectsApiService: ProjectsApiService,
-    private store: Store
-  ) {}
+  projects$: Observable<IProject[]> = this.store.select(projectsSelector);
+  constructor(private router: Router, private store: Store) {}
 
   ngOnInit() {
-    this.projectsApiService.getProjects().subscribe((projects: IProject[]) => {
-      this.projects = projects;
-      this.store.dispatch(new LoadProjects({ projects: this.projects }));
-    });
+    this.store.dispatch(loadProjects());
   }
 
   openProjectCreatePage() {

@@ -1,1 +1,1 @@
-export type IResponsibilities = Array<number>;
+export type IResponsibilities = number[];

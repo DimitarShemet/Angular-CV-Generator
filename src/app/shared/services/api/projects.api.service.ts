@@ -1,56 +1,57 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
   IProject,
+  IProjectAttributes,
   IProjectResponse,
-  IProjectsResponse,
 } from '../../interfaces/project.interface';
-import { ProjectsService } from '../projects.service';
+import { FormatService } from '../format.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectsApiService {
-  constructor(
-    private http: HttpClient,
-    private projectsFormatter: ProjectsService
-  ) {}
+  constructor(private http: HttpClient, private formatService: FormatService) {}
 
-  addProject(project: IProject): Observable<any> {
-    return this.http.post(environment.BACKEND_URL + '/api/projects', {
-      data: project,
-    });
+  addProject(projectAttributes: IProjectAttributes): Observable<any> {
+    return this.http.post(
+      environment.BACKEND_URL + '/api/projects?populate=*',
+      {
+        data: projectAttributes,
+      }
+    );
   }
 
-  editProject(id: number, project: IProject) {
-    return this.http
-      .put(environment.BACKEND_URL + '/api/projects/' + id + '?populate=*', {
+  editProject(id: number, project: IProject): Observable<object> {
+    return this.http.put(
+      environment.BACKEND_URL + '/api/projects/' + id + '?populate=*',
+      {
         data: project,
-      })
-      .subscribe((val) => console.log(val));
+      }
+    );
   }
 
   getProjects(): Observable<IProject[]> {
     return this.http
-      .get<IProjectsResponse>(
-        environment.BACKEND_URL + '/api/projects?populate=*'
-      )
+      .get<any>(environment.BACKEND_URL + '/api/projects?populate=*')
       .pipe(
         map((elem) => elem.data),
-        map((elem) => this.projectsFormatter.formatProjectsResponse(elem))
+        catchError((err) => {
+          return throwError(err);
+        })
       );
   }
 
-  getProject(id: number): any {
+  getProjectById(id: number): Observable<IProject> {
     return this.http
       .get<IProjectResponse>(
         environment.BACKEND_URL + '/api/projects/' + id + '?populate=*'
       )
       .pipe(
         map((elem) => elem.data),
-        map((elem) => this.projectsFormatter.formatProjectResponse(elem))
+        map((elem: any) => this.formatService.formatProjectResponse(elem))
       );
   }
 }

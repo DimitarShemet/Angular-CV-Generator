@@ -17,28 +17,5 @@ export class ProjectsService {
       }, 0) + 1
     );
   }
-  formatProjectsResponse(projects: any): Array<any> {
-    return projects.map((elem: any) => ({
-      ...elem,
-      attributes: {
-        ...elem.attributes,
-        responsibilities: elem.attributes.responsibilities.data.map(
-          (elem: any) => elem.id
-        ),
-        skills: elem.attributes.skills.data.map((elem: any) => elem.id),
-      },
-    }));
-  }
-  formatProjectResponse(project: any): any {
-    return {
-      ...project,
-      attributes: {
-        ...project.attributes,
-        responsibilities: project.attributes.responsibilities.data.map(
-          (elem: any) => elem.id
-        ),
-        skills: project.attributes.skills.data.map((elem: any) => elem.id),
-      },
-    };
-  }
 }
+// снести

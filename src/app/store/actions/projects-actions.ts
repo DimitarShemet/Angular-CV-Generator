@@ -1,29 +1,32 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import {
   IProject,
   IProjectAttributes,
 } from 'src/app/shared/interfaces/project.interface';
 
-export enum ProjectsActionsTypes {
-  LoadProjects = '[Projects] Load Projects',
-  AddProject = '[Projects] add Project',
-  EditProject = '[Projects] Edit Project',
-}
-export class LoadProjects implements Action {
-  readonly type = ProjectsActionsTypes.LoadProjects;
-  constructor(public payload: { projects: IProject[] }) {}
-}
+export const loadProjects = createAction('[Projects] Load Projects');
 
-export class AddProject implements Action {
-  readonly type = ProjectsActionsTypes.AddProject;
-  constructor(public payload: { project: IProject }) {}
-}
+export const projectsLoadedSuccess = createAction(
+  '[Projects] Projects Loaded Success',
+  props<{ projects: IProject[] }>()
+);
+export const projectsLoadedError = createAction(
+  '[Projects] Projects Loaded Error'
+);
 
-export class EditProject implements Action {
-  readonly type = ProjectsActionsTypes.EditProject;
-  constructor(
-    public payload: { id: number; projectAttributes: IProjectAttributes }
-  ) {}
-}
+export const addProject = createAction(
+  '[Projects] add Project',
+  props<{ projectAttributes: IProjectAttributes }>()
+);
 
-export type ProjectsActions = AddProject | LoadProjects | EditProject;
+export const projectAddedSuccess = createAction(
+  '[Projects] Project added Success',
+  props<{ project: IProject }>()
+);
+
+export const editProject = createAction(
+  '[Projects] Edit Project',
+  props<{ id: number; projectAttributes: IProjectAttributes }>()
+);
+
+// переписать на 15 версию ngrx

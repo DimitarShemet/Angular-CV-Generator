@@ -1,2 +1,21 @@
-<p>employees works!</p>
-<app-table></app-table>
+<div class="router__outlet_wrapper">
+  <div class="router__outlet_inner">
+    <button nz-button nzType="primary">Add project</button>
+
+    <app-table
+      [tableData]="employees"
+      [tableHeader]="[
+        'Firtst Name',
+        'Last Name ',
+        'Email',
+        'Description',
+        'Skills'
+      ]"
+      firstColumn="firstName"
+      secondColumn="lastName"
+      thirdColumn="email"
+      fourColumn="description"
+      fifthColumn="skills"
+    ></app-table>
+  </div>
+</div>

@@ -1,55 +1,36 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { IProjectsState } from 'src/app/shared/interfaces/projects-state.interface';
-import {
-  ProjectsActions,
-  ProjectsActionsTypes,
-} from '../actions/projects-actions';
+import { createReducer, on } from '@ngrx/store';
+import * as ProjectsActions from '../actions/projects-actions';
 
 const initialState: IProjectsState = {
   projects: [],
 };
 
-export const projectsReducer = (
-  state: IProjectsState = initialState,
-  action: ProjectsActions
-): IProjectsState => {
-  switch (action.type) {
-    case ProjectsActionsTypes.LoadProjects:
-      return {
-        ...state,
-        projects: [...action.payload.projects],
-      };
+export const projectsReducer = createReducer(
+  initialState,
+  on(ProjectsActions.projectsLoadedSuccess, (state, { projects }) => ({
+    ...state,
+    projects: projects,
+  })),
+  on(ProjectsActions.projectAddedSuccess, (state, { project }) => ({
+    ...state,
+    projects: [...state.projects, project],
+  })),
 
-    case ProjectsActionsTypes.AddProject:
-      return {
-        ...state,
-        projects: [...state.projects, action.payload.project],
-      };
+  on(ProjectsActions.editProject, (state, { id, projectAttributes }) => {
+    const updatedProjects = [...state.projects];
+    const projectIndex = updatedProjects.findIndex((elem) => elem.id === id);
+    updatedProjects[projectIndex] = {
+      ...updatedProjects[projectIndex],
+      attributes: projectAttributes,
+    };
 
-    case ProjectsActionsTypes.EditProject:
-      const updatedProjects = [...state.projects];
-      const projectIndex = updatedProjects.findIndex(
-        (elem) => elem.id === action.payload.id
-      );
-
-      updatedProjects[projectIndex] = {
-        ...updatedProjects[projectIndex],
-        attributes: action.payload.projectAttributes,
-      };
-
-      return {
-        ...state,
-        projects: updatedProjects,
-      };
-
-    default:
-      return state;
-  }
-};
-
-export const featureSelecetor =
-  createFeatureSelector<IProjectsState>('projects');
-export const projectsSelector = createSelector(
-  featureSelecetor,
-  (state) => state.projects
+    return {
+      ...state,
+      projects: updatedProjects,
+    };
+  })
 );
+
+// переписать на ngrx15

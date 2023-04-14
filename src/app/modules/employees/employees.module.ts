@@ -10,6 +10,8 @@ import { EmployeeEditInfoComponent } from './components/employee-edit-info/emplo
 import { EmployeeEditCvComponent } from './components/employee-edit-cv/employee-edit-cv.component';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { TranslateModule } from '@ngx-translate/core';
     TableComponent,
     ProjectFormComponent,
     TranslateModule,
+    NzButtonModule,
+    ReactiveFormsModule,
   ],
 })
 export class EmployeesModule {}

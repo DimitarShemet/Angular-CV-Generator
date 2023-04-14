@@ -5,19 +5,22 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { PagePath } from 'src/app/shared/enums/routing-path.enums';
+import { ISelectOptions } from 'src/app/shared/interfaces/label-options.interface';
 
 import {
   IProject,
   IProjectAttributes,
 } from 'src/app/shared/interfaces/project.interface';
 import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.service';
+import { ResponsibilitiesApiService } from 'src/app/shared/services/api/responsibilities-api.service';
+import { SkillsApiService } from 'src/app/shared/services/api/skills-api.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 import {
-  AddProject,
-  LoadProjects,
+  addProject,
+  loadProjects,
 } from 'src/app/store/actions/projects-actions';
 
 @Component({
@@ -27,15 +30,19 @@ import {
 })
 export class ProjectCreatePageComponent {
   form: FormGroup;
-  formControl = new FormControl('');
+  // написать не форму, а формконтрол?, формконтрол не содержит required?
   projects: IProject[];
+  skillsOption: ISelectOptions;
+  responsibilitiesOption: ISelectOptions;
 
   constructor(
     fb: FormBuilder,
     private projectsApiService: ProjectsApiService,
     private projectsService: ProjectsService,
     public store: Store,
-    private router: Router
+    private router: Router,
+    private skillsApiService: SkillsApiService,
+    private responsibilitiesApiService: ResponsibilitiesApiService
   ) {
     this.form = fb.group({
       projectForm: [null, Validators.required],
@@ -43,25 +50,24 @@ export class ProjectCreatePageComponent {
   }
 
   ngOnInit() {
-    this.projectsApiService.getProjects().subscribe((projects: IProject[]) => {
-      this.projects = projects;
-      this.store.dispatch(new LoadProjects({ projects: this.projects }));
+    // this.projectsApiService.getProjects().subscribe((projects: IProject[]) => {
+    //   this.projects = projects;
+    //   this.store.dispatch(loadProjects());
+    // });
+    this.skillsApiService.getSkills().subscribe((value) => {
+      this.skillsOption = value;
+    });
+    this.responsibilitiesApiService.getResponsibilities().subscribe((value) => {
+      this.responsibilitiesOption = value;
     });
   }
 
   submitForm() {
-    this.store.dispatch(
-      new AddProject({
-        project: {
-          id: this.projectsService.getNewId(this.projects),
-          attributes: this.form.get('projectForm').value as IProjectAttributes,
-        },
-      })
-    );
+    // переписать и диспатчиить ответ
 
-    this.projectsApiService
-      .addProject(this.form.get('projectForm').value)
-      .subscribe((answer) => console.log(answer));
+    this.store.dispatch(
+      addProject({ projectAttributes: this.form.get('projectForm').value })
+    );
 
     this.router.navigate([PagePath.ProjectsFullPath]);
   }

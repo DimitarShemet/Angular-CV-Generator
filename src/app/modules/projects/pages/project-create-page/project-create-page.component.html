@@ -2,7 +2,11 @@
   <div class="router__outlet_inner">
     <button nz-button nzType="default">Archive</button>
     <form class="project__form" [formGroup]="form" (ngSubmit)="submitForm()">
-      <app-project-form formControlName="projectForm"></app-project-form>
+      <app-project-form
+        formControlName="projectForm"
+        [skillsOption]="skillsOption"
+        [responsibilitiesOption]="responsibilitiesOption"
+      ></app-project-form>
       <div class="projects__footer">
         <button
           nz-button
