@@ -24,11 +24,14 @@ export class ProjectsApiService {
     );
   }
 
-  editProject(id: number, project: IProject): Observable<object> {
+  changeProject(
+    id: number,
+    projectAttributes: IProjectAttributes
+  ): Observable<any> {
     return this.http.put(
       environment.BACKEND_URL + '/api/projects/' + id + '?populate=*',
       {
-        data: project,
+        data: projectAttributes,
       }
     );
   }

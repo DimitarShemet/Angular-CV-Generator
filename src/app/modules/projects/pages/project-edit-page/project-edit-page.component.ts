@@ -14,7 +14,7 @@ import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.ser
 import { ResponsibilitiesApiService } from 'src/app/shared/services/api/responsibilities-api.service';
 import { SkillsApiService } from 'src/app/shared/services/api/skills-api.service';
 
-import { editProject } from 'src/app/store/actions/projects-actions';
+import { changeProject } from 'src/app/store/actions/projects-actions';
 
 @Component({
   selector: 'app-project-edit-page',
@@ -57,11 +57,8 @@ export class ProjectEditPageComponent {
 
   submitForm() {
     const formValue = this.form.get('projectForm').value;
-    this.projectsApiService
-      .editProject(this.id, formValue)
-      .subscribe(console.log);
     this.store.dispatch(
-      editProject({ id: this.id, projectAttributes: formValue })
+      changeProject({ id: this.id, projectAttributes: formValue })
     );
     this.router.navigate([PagePath.ProjectsFullPath]);
   }

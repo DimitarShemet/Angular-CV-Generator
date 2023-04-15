@@ -40,13 +40,40 @@ export const addProject = createEffect(
       exhaustMap((action) => {
         console.log(action.projectAttributes);
         return projectsApiService.addProject(action.projectAttributes).pipe(
-          map((answer) => {
-            console.log(answer);
+          map((response) => {
+            console.log(response);
             return ProjectsActions.projectAddedSuccess({
-              project: answer.data,
+              project: response.data,
             });
-          })
+          }),
+          catchError(() => of(ProjectsActions.projectAddedError()))
         );
+      })
+    );
+  },
+  { functional: true }
+);
+
+export const changeProject = createEffect(
+  (
+    actions$ = inject(Actions),
+    projectsApiService = inject(ProjectsApiService)
+  ) => {
+    return actions$.pipe(
+      ofType(ProjectsActions.changeProject),
+      exhaustMap((action) => {
+        console.log(action.projectAttributes);
+        return projectsApiService
+          .changeProject(action.id, action.projectAttributes)
+          .pipe(
+            map((response) => {
+              console.log(response);
+              return ProjectsActions.projectChangedSuccess({
+                project: response.data,
+              });
+            }),
+            catchError(() => of(ProjectsActions.projectChangedError()))
+          );
       })
     );
   },

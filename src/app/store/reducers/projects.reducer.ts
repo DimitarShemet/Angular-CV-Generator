@@ -18,12 +18,13 @@ export const projectsReducer = createReducer(
     projects: [...state.projects, project],
   })),
 
-  on(ProjectsActions.editProject, (state, { id, projectAttributes }) => {
+  on(ProjectsActions.projectChangedSuccess, (state, { project }) => {
     const updatedProjects = [...state.projects];
-    const projectIndex = updatedProjects.findIndex((elem) => elem.id === id);
+    const projectIndex = updatedProjects.findIndex(
+      (elem) => elem.id === project.id
+    );
     updatedProjects[projectIndex] = {
-      ...updatedProjects[projectIndex],
-      attributes: projectAttributes,
+      ...project,
     };
 
     return {

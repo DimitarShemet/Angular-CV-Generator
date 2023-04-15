@@ -1,27 +1,16 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { PagePath } from 'src/app/shared/enums/routing-path.enums';
 import { ISelectOptions } from 'src/app/shared/interfaces/label-options.interface';
 
-import {
-  IProject,
-  IProjectAttributes,
-} from 'src/app/shared/interfaces/project.interface';
+import { IProject } from 'src/app/shared/interfaces/project.interface';
 import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.service';
 import { ResponsibilitiesApiService } from 'src/app/shared/services/api/responsibilities-api.service';
 import { SkillsApiService } from 'src/app/shared/services/api/skills-api.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
-import {
-  addProject,
-  loadProjects,
-} from 'src/app/store/actions/projects-actions';
+import { addProject } from 'src/app/store/actions/projects-actions';
 
 @Component({
   selector: 'app-project-create-page',
@@ -37,8 +26,6 @@ export class ProjectCreatePageComponent {
 
   constructor(
     fb: FormBuilder,
-    private projectsApiService: ProjectsApiService,
-    private projectsService: ProjectsService,
     public store: Store,
     private router: Router,
     private skillsApiService: SkillsApiService,
@@ -50,10 +37,6 @@ export class ProjectCreatePageComponent {
   }
 
   ngOnInit() {
-    // this.projectsApiService.getProjects().subscribe((projects: IProject[]) => {
-    //   this.projects = projects;
-    //   this.store.dispatch(loadProjects());
-    // });
     this.skillsApiService.getSkills().subscribe((value) => {
       this.skillsOption = value;
     });
