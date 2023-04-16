@@ -1,26 +1,28 @@
 <div class="router__outlet_wrapper">
   <div class="router__outlet_inner">
-    <button nz-button nzType="primary" (click)="openProjectCreatePage()">
-      Add project
+    <button nz-button nzType="primary">
+      <a [routerLink]="projectCreatePagePath">Add project</a>
     </button>
 
     <app-table
       [tableData]="projects$ | async"
-      [tableHeader]="[
-        'Name',
-        'InternalName',
-        'Domain',
-        'Description',
-        'Skills'
-      ]"
-      [tableColumns]="[
-        'name',
-        'internalName',
-        'domain',
-        'description',
-        'skills'
-      ]"
-      (sendId)="openProjectEditPage($event)"
+      [tableColumns]="{
+        columnsHeaders: [
+          'Name',
+          'InternalName',
+          'Domain',
+          'Description',
+          'Skills'
+        ],
+        columnsProperties: [
+          'name',
+          'internalName',
+          'domain',
+          'description',
+          'skills'
+        ]
+      }"
+      (sendProjectId)="openProjectEditPage($event)"
     ></app-table>
   </div>
 </div>

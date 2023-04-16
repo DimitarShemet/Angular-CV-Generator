@@ -6,10 +6,8 @@ import { PagePath } from 'src/app/shared/enums/routing-path.enums';
 import { ISelectOptions } from 'src/app/shared/interfaces/label-options.interface';
 
 import { IProject } from 'src/app/shared/interfaces/project.interface';
-import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.service';
 import { ResponsibilitiesApiService } from 'src/app/shared/services/api/responsibilities-api.service';
 import { SkillsApiService } from 'src/app/shared/services/api/skills-api.service';
-import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { addProject } from 'src/app/store/actions/projects-actions';
 
 @Component({

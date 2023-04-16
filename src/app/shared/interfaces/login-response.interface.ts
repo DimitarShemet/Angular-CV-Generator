@@ -1,3 +1,3 @@
-export interface ILogInResponse {
+export interface IAuthResponseData {
   jwt: string;
 }

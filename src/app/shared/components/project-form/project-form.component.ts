@@ -15,6 +15,10 @@ import { TextareaComponent } from '../controls/textarea/textarea.component';
 import { ProjectsApiService } from '../../services/api/projects.api.service';
 import { BaseControl } from '../../classes/base-control.class';
 import { ISelectOptions } from '../../interfaces/label-options.interface';
+import { Store } from '@ngrx/store';
+import { skillsSelector } from 'src/app/store/selectors/skills-selectors';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-project-form',
@@ -22,6 +26,7 @@ import { ISelectOptions } from '../../interfaces/label-options.interface';
   styleUrls: ['./project-form.component.scss'],
   standalone: true,
   imports: [
+    CommonModule,
     InputComponent,
     DatepickerComponent,
     TextareaComponent,
@@ -31,10 +36,14 @@ import { ISelectOptions } from '../../interfaces/label-options.interface';
   ],
 })
 export class ProjectFormComponent extends BaseControl {
-  @Input() skillsOption: ISelectOptions;
+  skillsOption: Observable<ISelectOptions> = this.store.select(skillsSelector);
   @Input() responsibilitiesOption: ISelectOptions;
 
-  constructor(private fb: FormBuilder, override ngControl: NgControl) {
+  constructor(
+    private fb: FormBuilder,
+    override ngControl: NgControl,
+    private store: Store
+  ) {
     super(ngControl);
   }
 

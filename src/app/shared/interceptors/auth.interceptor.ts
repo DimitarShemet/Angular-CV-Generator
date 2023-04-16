@@ -7,7 +7,7 @@ import {
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
-import { TOKEN } from '../constants/token.consts';
+import { TOKEN_KEY } from '../constants/token.consts';
 import { ModulePath } from '../enums/routing-path.enums';
 import { AuthService } from '../services/auth.service';
 
@@ -26,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
       const clonedReq = req.clone({
         headers: req.headers.append(
           'Authorization',
-          'Bearer ' + localStorage.getItem(TOKEN)
+          'Bearer ' + localStorage.getItem(TOKEN_KEY)
         ),
       });
       return next.handle(clonedReq);

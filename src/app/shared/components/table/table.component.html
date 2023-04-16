@@ -1,7 +1,7 @@
 <nz-table #basicTable [nzData]="tableData" [nzPageSize]="8">
   <thead>
     <tr>
-      <th *ngFor="let elem of tableHeader">{{ elem }}</th>
+      <th *ngFor="let elem of tableColumns.columnsHeaders">{{ elem }}</th>
     </tr>
   </thead>
   <tbody>
@@ -10,7 +10,7 @@
       (click)="onClick(elem.id)"
     >
       <!-- // id можем быть с большой, может быть с маленькой -->
-      <td *ngFor="let column of tableColumns">
+      <td *ngFor="let column of tableColumns.columnsProperties">
         {{ elem.attributes[column] }}
       </td>
     </tr>

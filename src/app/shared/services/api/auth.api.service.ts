@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { ILogInData } from '../../interfaces/login-data.interface';
-import { ILogInResponse } from '../../interfaces/login-response.interface';
+import { IAuthResponseData } from '../../interfaces/login-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +12,8 @@ import { ILogInResponse } from '../../interfaces/login-response.interface';
 export class AuthApiService {
   constructor(private http: HttpClient) {}
 
-  getToken(logInData: ILogInData): Observable<ILogInResponse> {
-    return this.http.post<ILogInResponse>(
+  getToken(logInData: ILogInData): Observable<IAuthResponseData> {
+    return this.http.post<IAuthResponseData>(
       environment.BACKEND_URL + '/api/auth/local',
       logInData
     );

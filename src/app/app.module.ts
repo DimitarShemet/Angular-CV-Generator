@@ -20,6 +20,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import * as ProjectsEffects from '../app/store/effects/projects-effects';
+import * as AuthEffects from '../app/store/effects/auth-effects';
+import * as SkillsEffects from './store/effects/skills-effects';
 
 registerLocaleData(en);
 
@@ -48,7 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot(ProjectsEffects),
+    EffectsModule.forRoot(ProjectsEffects, AuthEffects, SkillsEffects),
   ],
   providers: [
     {

@@ -2,10 +2,11 @@ import { IResponsibilities } from './responsibilities.interface';
 import { ISkills } from './skills.interface';
 
 export interface IProject {
-  id?: number;
+  id: number;
   attributes: IProjectAttributes;
 }
 export interface IProjectAttributes {
+  [key: string]: any;
   name: string;
   description: string;
   domain: string;

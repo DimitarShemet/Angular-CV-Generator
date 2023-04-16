@@ -13,6 +13,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { GetErrorMessagePipe } from 'src/app/shared/pipes/get-error-message.pipe';
+import { ISelectOptions } from 'src/app/shared/interfaces/label-options.interface';
 
 @Component({
   selector: 'app-select',
@@ -30,7 +31,7 @@ import { GetErrorMessagePipe } from 'src/app/shared/pipes/get-error-message.pipe
   ],
 })
 export class SelectComponent extends BaseControl {
-  @Input() listOfOption: any;
+  @Input() listOfOption: ISelectOptions;
 
   constructor(ngControl: NgControl) {
     super(ngControl);

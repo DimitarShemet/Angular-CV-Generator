@@ -9,12 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { PagePath } from 'src/app/shared/enums/routing-path.enums';
 import { ISelectOptions } from 'src/app/shared/interfaces/label-options.interface';
-import { IProject } from 'src/app/shared/interfaces/project.interface';
 import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.service';
 import { ResponsibilitiesApiService } from 'src/app/shared/services/api/responsibilities-api.service';
 import { SkillsApiService } from 'src/app/shared/services/api/skills-api.service';
 
 import { changeProject } from 'src/app/store/actions/projects-actions';
+import { getSkills } from 'src/app/store/actions/skills-actions';
 
 @Component({
   selector: 'app-project-edit-page',
@@ -43,6 +43,7 @@ export class ProjectEditPageComponent {
   }
 
   ngOnInit() {
+    this.store.dispatch(getSkills());
     this.route.data.subscribe((data) => {
       this.form.get('projectForm').patchValue(data['project'].attributes);
       this.id = data['project'].id;

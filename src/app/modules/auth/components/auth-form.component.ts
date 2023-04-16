@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ModulePath } from 'src/app/shared/enums/routing-path.enums';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { Store } from '@ngrx/store';
+
+import { logIn } from 'src/app/store/actions/auth-actions';
 
 @Component({
   selector: 'auth-form',
@@ -10,21 +10,23 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./auth-form.component.scss'],
 })
 export class AuthFormComponent {
-  constructor(public fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+
+    private store: Store
+  ) {}
   form = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],
   });
   submitForm() {
-    this.authService.logIn({
-      identifier: this.form.get('username').value,
-      password: this.form.get('password').value,
-    });
-  }
-
-  ngOnInit() {
-    this.form.valueChanges.subscribe((data) => {
-      console.log(data);
-    });
+    this.store.dispatch(
+      logIn({
+        data: {
+          identifier: this.form.get('username').value,
+          password: this.form.get('password').value,
+        },
+      })
+    );
   }
 }

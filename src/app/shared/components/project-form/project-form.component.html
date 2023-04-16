@@ -25,7 +25,7 @@
   </div>
   <div class="project__form_row">
     <app-select
-      [listOfOption]="skillsOption"
+      [listOfOption]="skillsOption | async"
       formControlName="skills"
       placeholder="Type skills"
       class="project__form_item"

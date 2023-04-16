@@ -7,10 +7,7 @@ const initialState: IEmployeesState = {
 
 export const employeesReducer = (
   state: IEmployeesState = initialState
-  // action: ToDoActions
 ): IEmployeesState => {
-  // switch (action.type) {
-  //   default:
   return state;
   // }
 };

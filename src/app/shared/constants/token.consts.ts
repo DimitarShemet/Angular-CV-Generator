@@ -1,4 +1,4 @@
-export const TOKEN = 'JWT';
+export const TOKEN_KEY = 'JWT';
 export const EXPIRES = 'expires';
-export const JWTExpirationPeriod = 1000 * 60 * 40;
-export const JWTExpirationTime = Date.now() + JWTExpirationPeriod;
+export const JWT_EXPIRATION_PERIOD = 1000 * 60 * 40;
+export const JWT_EXPIRATION_TIME = Date.now() + JWT_EXPIRATION_PERIOD;

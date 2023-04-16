@@ -16,16 +16,13 @@ import { projectsSelector } from 'src/app/store/selectors/projects-selectors';
 })
 export class ProjectsPageComponent {
   projects$: Observable<IProject[]> = this.store.select(projectsSelector);
+  projectCreatePagePath =
+    ModulePath.ProjectsFullPath + PagePath.ProjectCreateFullPath;
+
   constructor(private router: Router, private store: Store) {}
 
   ngOnInit() {
     this.store.dispatch(loadProjects());
-  }
-
-  openProjectCreatePage() {
-    this.router.navigate([
-      ModulePath.ProjectsFullPath + PagePath.ProjectCreateFullPath,
-    ]);
   }
 
   openProjectEditPage(id: number) {

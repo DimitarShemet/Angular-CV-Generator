@@ -1,26 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { EXPIRES, JWTExpirationTime, TOKEN } from '../constants/token.consts';
+import {
+  EXPIRES,
+  JWT_EXPIRATION_TIME,
+  TOKEN_KEY,
+} from '../constants/token.consts';
 import { ModulePath } from '../enums/routing-path.enums';
-import { ILogInData } from '../interfaces/login-data.interface';
-import { AuthApiService } from './api/auth.api.service';
+import { IAuthResponseData } from '../interfaces/login-response.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private authApiService: AuthApiService, private router: Router) {}
+  constructor(private router: Router) {}
 
-  logIn(logInData: ILogInData) {
-    this.authApiService.getToken(logInData).subscribe((response) => {
-      localStorage.setItem(TOKEN, response.jwt);
-      localStorage.setItem(EXPIRES, JSON.stringify(JWTExpirationTime));
-      this.router.navigate([ModulePath.CoreFullPath]);
-    });
+  logIn(authResponseData: IAuthResponseData) {
+    localStorage.setItem(TOKEN_KEY, authResponseData.jwt);
+    localStorage.setItem(EXPIRES, JSON.stringify(JWT_EXPIRATION_TIME));
+    this.router.navigate([ModulePath.CoreFullPath]);
   }
 
   isAuthenticated() {
-    return Boolean(localStorage.getItem(TOKEN));
+    return Boolean(localStorage.getItem(TOKEN_KEY));
   }
 
   JWTIsActual() {
