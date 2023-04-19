@@ -1,14 +1,6 @@
 import { Directive, Input } from '@angular/core';
 
-import {
-  ControlValueAccessor,
-  FormArray,
-  FormControl,
-  FormGroup,
-  NgControl,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 
 @Directive({
   selector: '[appBaseAccessor]',
@@ -21,16 +13,16 @@ export class BaseControl implements ControlValueAccessor {
   @Input() label: string;
   @Input() icon?: string;
 
-  formControl: any = new FormControl('');
+  formControl: any = new FormControl();
 
-  onChange: any = () => {};
-  onTouch: any = () => {};
+  onChange: Function = () => {};
+  onTouch: Function = () => {};
 
   constructor(protected ngControl: NgControl) {
     this.ngControl.valueAccessor = this;
   }
 
-  writeValue(value: any) {
+  writeValue(value: object) {
     this.formControl.setValue(value);
   }
   registerOnChange(fn: Function) {
@@ -45,10 +37,10 @@ export class BaseControl implements ControlValueAccessor {
   }
 
   ngOnInit() {
-    this.formControl.valueChanges.subscribe((val: any) => {
+    this.formControl.valueChanges.subscribe((val: object) => {
       this.onChange(val);
     });
 
-    this.formControl.setValidators(this.ngControl.control?.validator || null);
+    this.formControl.setValidators(this.ngControl.control.validator || null);
   }
 }

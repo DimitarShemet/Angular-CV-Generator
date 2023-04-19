@@ -1,24 +1,25 @@
-import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
-  FormGroup,
   NgControl,
   ReactiveFormsModule,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { getResponsibilities } from 'src/app/store/actions/responsibilities-actions';
+import { getSkills } from 'src/app/store/actions/skills-actions';
+import { skillsSelector } from 'src/app/store/selectors/skills-selectors';
+import { BaseControl } from '../../classes/base-control.class';
+
 import { DatepickerComponent } from '../controls/datepicker/datepicker.component';
 import { InputComponent } from '../controls/input/input.component';
 import { SelectComponent } from '../controls/select/select.component';
 import { TextareaComponent } from '../controls/textarea/textarea.component';
-import { ProjectsApiService } from '../../services/api/projects.api.service';
-import { BaseControl } from '../../classes/base-control.class';
-import { ISelectOptions } from '../../interfaces/label-options.interface';
-import { Store } from '@ngrx/store';
-import { skillsSelector } from 'src/app/store/selectors/skills-selectors';
-import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { responsibilitiesSelector } from 'src/app/store/selectors/responsibilities-selectors';
+import { IOption } from '../../interfaces/common.interface';
 
 @Component({
   selector: 'app-project-form',
@@ -36,8 +37,10 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class ProjectFormComponent extends BaseControl {
-  skillsOption: Observable<ISelectOptions> = this.store.select(skillsSelector);
-  @Input() responsibilitiesOption: ISelectOptions;
+  skillsOption: Observable<IOption[]> = this.store.select(skillsSelector);
+  responsibilitiesOption: Observable<IOption[]> = this.store.select(
+    responsibilitiesSelector
+  );
 
   constructor(
     private fb: FormBuilder,
@@ -48,9 +51,12 @@ export class ProjectFormComponent extends BaseControl {
   }
 
   override ngOnInit(): void {
+    this.store.dispatch(getSkills());
+    this.store.dispatch(getResponsibilities());
     super.ngOnInit();
     this.ngControl.control.setValidators(this.validate.bind(this));
-    // разобраться до конца с этой строчкой; нужен ли validars requyired наверху, нужна ли форма наверху?
+    // разобраться до конца с этой строчкой; нужен ли validars requyired снизу, нужна ли форма в шаблоне? validatorsRequired скидывает все зхначения по валидации и
+    // новые?
   }
 
   validate(): ValidationErrors | null {
@@ -68,7 +74,8 @@ export class ProjectFormComponent extends BaseControl {
     description: ['', [Validators.required]],
   });
 
-  override writeValue(value: any): void {
+  override writeValue(value: object): void {
+    //когда запускается этот метод
     if (value) {
       this.formControl.patchValue(value);
     }

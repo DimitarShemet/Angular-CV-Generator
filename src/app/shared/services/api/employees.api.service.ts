@@ -12,9 +12,9 @@ export class EmployeesApiService {
   constructor(private http: HttpClient, private formatService: FormatService) {}
   getEmployees(): Observable<IEmployee[]> {
     return this.http
-      .get<Array<any>>(environment.BACKEND_URL + '/api/users?populate=*')
+      .get<IEmployee[]>(environment.BACKEND_URL + '/api/users?populate=*')
       .pipe(
-        map((employees: Array<any>) => {
+        map((employees) => {
           console.log(employees);
           return this.formatService.formatEmployeesResponse(employees);
         })

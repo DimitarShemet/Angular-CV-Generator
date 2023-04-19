@@ -10,8 +10,7 @@ import { FormatService } from 'src/app/shared/services/format.service';
 export const loadProjects = createEffect(
   (
     actions$ = inject(Actions),
-    projectsApiService = inject(ProjectsApiService),
-    formatService = inject(FormatService)
+    projectsApiService = inject(ProjectsApiService)
   ) => {
     return actions$.pipe(
       ofType(ProjectsActions.loadProjects),
@@ -19,7 +18,7 @@ export const loadProjects = createEffect(
         projectsApiService.getProjects().pipe(
           map((projects) => {
             return ProjectsActions.projectsLoadedSuccess({
-              projects: formatService.formatSkillsProperty(projects),
+              projects: projects,
             });
           }),
           catchError(() => of(ProjectsActions.projectsLoadedError()))
@@ -43,7 +42,7 @@ export const addProject = createEffect(
           map((response) => {
             console.log(response);
             return ProjectsActions.projectAddedSuccess({
-              project: response.data,
+              project: response,
             });
           }),
           catchError(() => of(ProjectsActions.projectAddedError()))
@@ -69,7 +68,7 @@ export const changeProject = createEffect(
             map((response) => {
               console.log(response);
               return ProjectsActions.projectChangedSuccess({
-                project: response.data,
+                project: response,
               });
             }),
             catchError(() => of(ProjectsActions.projectChangedError()))

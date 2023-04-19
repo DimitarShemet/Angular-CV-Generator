@@ -1,5 +1,5 @@
-import { ISelectOptions } from './label-options.interface';
+import { IOption } from './common.interface';
 
 export interface ISkillsState {
-  skills: ISelectOptions;
+  skills: IOption[];
 }

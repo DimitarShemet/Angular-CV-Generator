@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
   IProject,
   IProjectAttributes,
+  IProjectDTO,
   IProjectResponse,
+  IProjectsResponse,
 } from '../../interfaces/project.interface';
 import { FormatService } from '../format.service';
 
@@ -15,35 +17,45 @@ import { FormatService } from '../format.service';
 export class ProjectsApiService {
   constructor(private http: HttpClient, private formatService: FormatService) {}
 
-  addProject(projectAttributes: IProjectAttributes): Observable<any> {
-    return this.http.post(
-      environment.BACKEND_URL + '/api/projects?populate=*',
-      {
-        data: projectAttributes,
-      }
-    );
+  addProject(projectAttributes: IProjectAttributes): Observable<IProject> {
+    return this.http
+      .post<IProjectResponse>(
+        environment.BACKEND_URL + '/api/projects?populate=*',
+        {
+          data: projectAttributes,
+        }
+      )
+      .pipe(
+        map((elem) => elem.data),
+        map((elem) => this.formatService.formatProjectResponse(elem))
+      );
   }
 
   changeProject(
     id: number,
     projectAttributes: IProjectAttributes
-  ): Observable<any> {
-    return this.http.put(
-      environment.BACKEND_URL + '/api/projects/' + id + '?populate=*',
-      {
-        data: projectAttributes,
-      }
-    );
+  ): Observable<IProject> {
+    return this.http
+      .put<IProjectResponse>(
+        environment.BACKEND_URL + '/api/projects/' + id + '?populate=*',
+        {
+          data: projectAttributes,
+        }
+      )
+      .pipe(
+        map((elem) => elem.data),
+        map((elem) => this.formatService.formatProjectResponse(elem))
+      );
   }
 
   getProjects(): Observable<IProject[]> {
     return this.http
-      .get<any>(environment.BACKEND_URL + '/api/projects?populate=*')
+      .get<IProjectsResponse>(
+        environment.BACKEND_URL + '/api/projects?populate=*'
+      )
       .pipe(
         map((elem) => elem.data),
-        catchError((err) => {
-          return throwError(err);
-        })
+        map((elem) => this.formatService.formatSkillsProperty(elem))
       );
   }
 
@@ -54,7 +66,7 @@ export class ProjectsApiService {
       )
       .pipe(
         map((elem) => elem.data),
-        map((elem: any) => this.formatService.formatProjectResponse(elem))
+        map((elem) => this.formatService.formatProjectResponse(elem))
       );
   }
 }

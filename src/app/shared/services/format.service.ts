@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { IProject, IProjectDTO } from '../interfaces/project.interface';
+import { IEmployee } from '../interfaces/employee.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -6,32 +8,33 @@ import { Injectable } from '@angular/core';
 export class FormatService {
   constructor() {}
 
-  formatSkillsProperty(arr: Array<any>) {
-    return arr.map((elem) => ({
+  formatSkillsProperty(projects: IProjectDTO[]): IProject[] {
+    return projects.map((elem) => ({
       ...elem,
       attributes: {
         ...elem.attributes,
         skills: elem.attributes.skills.data
-          .map((elem: any) => elem.attributes.name)
+
+          .map((elem) => elem.attributes.name)
           .toString(),
       },
     }));
   }
 
-  formatProjectResponse(project: any): any {
+  formatProjectResponse(project: IProjectDTO): IProject {
     return {
       ...project,
       attributes: {
         ...project.attributes,
         responsibilities: project.attributes.responsibilities.data.map(
-          (elem: any) => elem.id
+          (elem) => elem.id
         ),
-        skills: project.attributes.skills.data.map((elem: any) => elem.id),
+        skills: project.attributes.skills.data.map((elem) => elem.id),
       },
     };
   }
-  formatEmployeesResponse(response: Array<any>): Array<any> {
+  formatEmployeesResponse(response: IEmployee[]): Array<any> {
     return response.map((elem: any) => ({ attributes: elem.id }));
   }
-  // доделать
+  // не забыть типизировать employeesResponse
 }
