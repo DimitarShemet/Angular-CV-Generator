@@ -4,8 +4,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ModulePath, PagePath } from 'src/app/shared/enums/routing-path.enums';
 import { IProject } from 'src/app/shared/interfaces/project.interface';
-import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.service';
-import { FormatService } from 'src/app/shared/services/format.service';
 import { loadProjects } from 'src/app/store/actions/projects-actions';
 import { projectsSelector } from 'src/app/store/selectors/projects-selectors';
 

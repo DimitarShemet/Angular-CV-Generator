@@ -1,6 +1,5 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { IProjectsState } from 'src/app/shared/interfaces/projects-state.interface';
 import { createReducer, on } from '@ngrx/store';
+import { IProjectsState } from 'src/app/shared/interfaces/projects-state.interface';
 import * as ProjectsActions from '../actions/projects-actions';
 
 const initialState: IProjectsState = {
@@ -33,5 +32,3 @@ export const projectsReducer = createReducer(
     };
   })
 );
-
-// переписать на ngrx15
