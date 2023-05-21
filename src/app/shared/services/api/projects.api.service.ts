@@ -55,7 +55,7 @@ export class ProjectsApiService {
       )
       .pipe(
         map((elem) => elem.data),
-        map((elem) => this.formatService.formatSkillsProperty(elem))
+        map((elem) => this.formatService.formatProjectsSkillsProperty(elem))
       );
   }
 

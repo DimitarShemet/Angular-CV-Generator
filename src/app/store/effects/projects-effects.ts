@@ -3,9 +3,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
 import { ProjectsApiService } from 'src/app/shared/services/api/projects.api.service';
 import * as ProjectsActions from '../actions/projects-actions';
-import { FormatService } from 'src/app/shared/services/format.service';
-
-// данные с сервера должны получать эффекты
 
 export const loadProjects = createEffect(
   (

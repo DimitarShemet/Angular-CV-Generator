@@ -14,13 +14,13 @@ import { IEmployee } from '../../interfaces/employee.interface';
   imports: [CommonModule, NzTableModule, RouterModule],
 })
 export class TableComponent {
-  @Input() tableData: IProject[];
+  @Input() tableData: IProject[] | any[];
   @Input() tableColumns: ItableColumns;
-  // @Input() tableColumns: string[]; // создать сущность
 
   @Output() sendProjectId = new EventEmitter<number>();
 
   onClick(id: number) {
+    console.log(id);
     this.sendProjectId.emit(id);
   }
 }

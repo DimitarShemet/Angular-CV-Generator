@@ -72,7 +72,7 @@ export class BreadcrumbComponents implements OnInit {
       path = path.replace(lastRoutePart, route.snapshot.params[paramName]);
       label = this.name;
     }
-    console.log(url);
+    // console.log(url);
     const nextUrl = path ? `${url}/${path}` : url;
     const breadcrumb: IBreadCrumb = {
       label: label,
@@ -82,7 +82,7 @@ export class BreadcrumbComponents implements OnInit {
     const newBreadcrumbs = breadcrumb.label
       ? [...breadcrumbs, breadcrumb]
       : [...breadcrumbs];
-    console.log(newBreadcrumbs);
+    // console.log(newBreadcrumbs);
     if (route.firstChild) {
       return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
     }

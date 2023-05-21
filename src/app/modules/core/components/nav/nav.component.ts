@@ -14,7 +14,7 @@ export class NavComponent {
     private router: Router,
     private projectsApiService: ProjectsApiService
   ) {
-    console.log(this.router.url);
+    // console.log(this.router.url);
   }
   moduleName: string;
   routerInfo: string;
@@ -27,7 +27,7 @@ export class NavComponent {
         startWith(this.router)
       )
       .subscribe((val) => {
-        console.log(this.router.url);
+        // console.log(this.router.url);
         const moduleName = this.router.url.split('/').filter((elem) => elem)[0];
         this.moduleName = this.makeFirstLetterToUpperCase(moduleName);
         const lastRoutePart = this.router.url.split('/').pop();

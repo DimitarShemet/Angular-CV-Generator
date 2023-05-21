@@ -1,12 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { IEmployee } from 'src/app/shared/interfaces/employee.interface';
 import { EmployeesApiService } from 'src/app/shared/services/api/employees.api.service';
 import { FormatService } from 'src/app/shared/services/format.service';
+import { loadEmployees } from 'src/app/store/actions/employees-actions';
+import { employeesSelector } from 'src/app/store/selectors/employees-selectors';
 
 @Component({
   selector: 'app-employees-page',
@@ -14,20 +13,11 @@ import { FormatService } from 'src/app/shared/services/format.service';
   styleUrls: ['./employees-page.component.scss'],
 })
 export class EmployeesPageComponent implements OnInit {
-  employees: Array<any>;
+  $employees: Observable<IEmployee[]> = this.store.select(employeesSelector);
 
-  constructor(
-    private employeesApiService: EmployeesApiService,
-
-    private formatService: FormatService
-  ) {}
+  constructor(private store: Store) {}
 
   ngOnInit() {
-    this.employeesApiService
-      .getEmployees()
-      .subscribe((employees: IEmployee[]) => {
-        this.employees = this.formatService.formatEmployeesResponse(employees);
-        console.log(this.employees);
-      });
+    this.store.dispatch(loadEmployees());
   }
 }

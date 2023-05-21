@@ -3,19 +3,19 @@
     <button nz-button nzType="primary">Add project</button>
 
     <app-table
-      [tableData]="employees"
+      [tableData]="$employees | async"
       [tableColumns]="{
         columnsHeaders: [
-          'Name',
-          'InternalName',
-          'Domain',
+          'FirstName',
+          'LastName',
+          'Email',
           'Description',
           'Skills'
         ],
         columnsProperties: [
-          'name',
-          'internalName',
-          'domain',
+          'firstName',
+          'lastName',
+          'email',
           'description',
           'skills'
         ]

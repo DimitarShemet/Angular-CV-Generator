@@ -2,7 +2,6 @@ import { createAction, props } from '@ngrx/store';
 import {
   IProject,
   IProjectAttributes,
-  IProjectDTO,
 } from 'src/app/shared/interfaces/project.interface';
 
 export const loadProjects = createAction('[Projects Page] Load Projects');
