@@ -5,3 +5,7 @@ nz-form-item {
     text-align: left;
   }
 }
+:host {
+  position: relative;
+  align-self: flex-start;
+}

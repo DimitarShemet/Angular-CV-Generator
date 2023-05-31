@@ -10,7 +10,7 @@ import { ProjectsApiService } from '../services/api/projects.api.service';
 @Injectable({ providedIn: 'root' })
 export class ProjectResolver implements Resolve<IProject> {
   constructor(private projectsApiService: ProjectsApiService) {}
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  resolve(route: ActivatedRouteSnapshot) {
     return this.projectsApiService.getProjectById(+route.params['id']);
   }
 }

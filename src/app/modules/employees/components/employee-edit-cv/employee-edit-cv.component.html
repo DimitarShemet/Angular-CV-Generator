@@ -1,3 +1,22 @@
-<p>employee-edit-cv works!</p>
-<app-employee-form></app-employee-form>
-<app-project-form></app-project-form>
+<div class="wrapper" [formGroup]="form">
+  <div class="cv__wrapper">
+    <nz-tabset nzTabPosition="left">
+      <nz-tab
+        *ngFor="let cv of employee.attributes.cvs; index as i"
+        [nzTitle]="titleTemplate"
+        (nzClick)="selectCv(i)"
+      >
+        <ng-template #titleTemplate>
+          <span> {{ cv.name }}</span>
+          <span nz-icon nzType="delete" nzTheme="outline"></span>
+        </ng-template>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+  <div class="forms__wrapper">
+    <app-employee-form
+      formControlName="employeeFormControl"
+    ></app-employee-form>
+    <app-project-form formControlName="projectFormControl"></app-project-form>
+  </div>
+</div>

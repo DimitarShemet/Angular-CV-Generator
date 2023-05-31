@@ -35,7 +35,8 @@ export class NavComponent {
         this.routerInfo = this.moduleName + ' list';
         if (isDynamicRoute) {
           this.projectsApiService
-            .getProjectById(+lastRoutePart)
+            // .getProjectById(+lastRoutePart)
+            .getProjectById(40)
             .pipe(map((project: IProject) => project.attributes.name))
             .subscribe((projectName: string) => {
               this.routerInfo = projectName + ' info';

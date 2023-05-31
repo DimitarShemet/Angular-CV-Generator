@@ -1,3 +1,5 @@
+import { ICv } from './cv.interface';
+import { IProject } from './project.interface';
 import { ISkills } from './skills.interface';
 
 export interface IEmployeeDTO {
@@ -15,22 +17,24 @@ export interface IEmployeeDTO {
   description: string;
   firstName: string;
   lastName: string;
-  cvs: any;
+  cvs: ICv[];
 }
 export interface IEmployee {
   id: number;
-  attributes: {
-    id: number;
-    username: string;
-    email: string;
-    confirmed: boolean;
-    blocked: boolean;
-    skills: string;
-    languages: Array<any>;
-    education: any;
-    description: string;
-    firstName: string;
-    lastName: string;
-    cvs: any;
-  };
+  attributes: IEmployeeAttributes;
+}
+
+export interface IEmployeeAttributes {
+  id: number;
+  username: string;
+  email: string;
+  confirmed: boolean;
+  blocked: boolean;
+  skills: string | number[];
+  languages: Array<any>;
+  education: any;
+  description: string;
+  firstName: string;
+  lastName: string;
+  cvs: ICv[];
 }

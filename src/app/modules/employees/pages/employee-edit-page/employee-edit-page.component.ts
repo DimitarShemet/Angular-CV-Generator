@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './employee-edit-page.component.html',
   styleUrls: ['./employee-edit-page.component.scss'],
 })
-export class EmployeeEditPageComponent {}
+export class EmployeeEditPageComponent {
+  constructor() {}
+}

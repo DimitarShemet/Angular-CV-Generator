@@ -1,8 +1,9 @@
 <div class="router__outlet_wrapper">
   <div class="router__outlet_inner">
-    <button nz-button nzType="primary">Add project</button>
+    <button nz-button nzType="primary">Add Employee</button>
 
     <app-table
+      (sendItemId)="openEmployeeEditPage($event)"
       [tableData]="$employees | async"
       [tableColumns]="{
         columnsHeaders: [

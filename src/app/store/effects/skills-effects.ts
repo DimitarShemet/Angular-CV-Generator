@@ -11,7 +11,6 @@ export const getSkills = createEffect(
       exhaustMap((action) =>
         skillsApiService.getSkills().pipe(
           map((skillsResponsePayload) => {
-            console.log(skillsResponsePayload);
             return SkillsActions.getSkillsSuccess({
               skills: skillsResponsePayload,
             });

@@ -24,6 +24,7 @@ import * as AuthEffects from '../app/store/effects/auth-effects';
 import * as SkillsEffects from './store/effects/skills-effects';
 import * as ResponsibilitiesEffects from './store/effects/responsibilities-effects';
 import * as EmployeesEffects from './store/effects/employees-effects';
+import { TabsComponent } from './shared/components/tabs/tabs.component';
 
 registerLocaleData(en);
 

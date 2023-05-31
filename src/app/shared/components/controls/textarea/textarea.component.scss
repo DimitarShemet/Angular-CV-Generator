@@ -1,9 +1,9 @@
-textarea {
-  height: 74px;
-}
 nz-form-item {
   flex-direction: column;
 }
 nz-form-label {
   align-self: flex-start;
+}
+:host {
+  position: relative;
 }

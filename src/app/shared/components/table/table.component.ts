@@ -17,10 +17,10 @@ export class TableComponent {
   @Input() tableData: IProject[] | any[];
   @Input() tableColumns: ItableColumns;
 
-  @Output() sendProjectId = new EventEmitter<number>();
+  @Output() sendItemId = new EventEmitter<number>();
 
-  onClick(id: number) {
+  clickItem(id: number) {
     console.log(id);
-    this.sendProjectId.emit(id);
+    this.sendItemId.emit(id);
   }
 }

@@ -20,11 +20,37 @@
 }
 .validation {
   color: red;
+  position: absolute;
+  bottom: 0;
 }
-.projects__footer {
-  padding-top: 80px;
+.form__footer {
   display: flex;
   justify-content: flex-end;
-  padding-bottom: 44px;
   background-color: #ffffff;
+}
+
+// .form__row:first-child {
+//   // margin-top: 40px;
+// }
+.form__row {
+  display: flex;
+  justify-content: flex-start;
+
+  padding-left: 35px;
+}
+
+.form__item {
+  margin-right: 60px;
+}
+
+.form__item:last-child {
+  margin-right: 0;
+}
+app-input,
+app-datepicker,
+app-textarea {
+  width: 200px;
+}
+app-select {
+  width: 400px;
 }

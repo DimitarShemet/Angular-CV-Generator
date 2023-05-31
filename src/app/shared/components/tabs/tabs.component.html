@@ -1,0 +1,32 @@
+<nz-tabset>
+  <nz-tab nzTitle="Info">
+    <form [formGroup]="employeeForm" (ngSubmit)="submitEmployeeForm()">
+      <app-employee-form
+        formControlName="employeeFormControl"
+      ></app-employee-form>
+      <div class="form__footer">
+        <button
+          nz-button
+          nzType="primary"
+          nzSize="default"
+          type="submit"
+          [disabled]="employeeForm.invalid"
+        >
+          Save
+        </button>
+        <button
+          type="button"
+          nz-button
+          nzType="default"
+          nzSize="default"
+          [routerLink]="employeesPagePath"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </nz-tab>
+  <nz-tab nzTitle="CV">
+    <app-employee-edit-cv [employee]="employee"></app-employee-edit-cv>
+  </nz-tab>
+</nz-tabset>

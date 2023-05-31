@@ -1,1 +1,37 @@
-<p>employee-form works!</p>
+<div [formGroup]="formControl">
+  <div class="form__row">
+    <app-input
+      formControlName="firstName"
+      placeholder="type first Name"
+      label="First Name"
+      class="form__item"
+    />
+    <app-input
+      formControlName="lastName"
+      placeholder="type last Name"
+      label="Last Name"
+      class="form__item"
+    />
+    <app-input
+      formControlName="email"
+      placeholder="type email"
+      label="Email"
+      class="form__item"
+    />
+  </div>
+  <div class="form__row">
+    <app-textarea
+      formControlName="description"
+      placeholder="type description"
+      label="Description"
+      class="form__item"
+    ></app-textarea>
+    <app-select
+      [listOfOption]="skillsOption | async"
+      formControlName="skills"
+      placeholder="type skills"
+      label="Skills"
+      class="form__item"
+    ></app-select>
+  </div>
+</div>

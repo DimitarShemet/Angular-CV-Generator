@@ -19,6 +19,7 @@ export class ProjectEditPageComponent {
   form: FormGroup;
   formControl = new FormControl('');
   id: number;
+  projectsPagePath = PagePath.ProjectsFullPath;
 
   constructor(
     fb: FormBuilder,
@@ -34,15 +35,17 @@ export class ProjectEditPageComponent {
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.form.get('projectForm').patchValue(data['project'].attributes);
+      console.log(data['project'].attributes);
       this.id = data['project'].id;
     });
   }
 
   submitForm() {
     const formValue = this.form.get('projectForm').value;
+    console.log(formValue);
     this.store.dispatch(
       changeProject({ id: this.id, projectAttributes: formValue })
     );
-    this.router.navigate([PagePath.ProjectsFullPath]);
+    this.router.navigate([this.projectsPagePath]);
   }
 }

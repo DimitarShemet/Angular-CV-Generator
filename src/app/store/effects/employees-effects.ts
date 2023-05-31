@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EmployeesApiService } from 'src/app/shared/services/api/employees.api.service';
 import * as EmployeesActions from '../actions/employees-actions';
-import { catchError, exhaustMap, map, of } from 'rxjs';
+import { catchError, exhaustMap, map, of, tap } from 'rxjs';
 
 export const loadEmployees = createEffect(
   (
@@ -20,6 +20,31 @@ export const loadEmployees = createEffect(
           }),
           catchError(() => of(EmployeesActions.employeesLoadedError()))
         )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const changeEmployee = createEffect(
+  (
+    actions$ = inject(Actions),
+    employeesApiService = inject(EmployeesApiService)
+  ) => {
+    return actions$.pipe(
+      ofType(EmployeesActions.changeEmployee),
+      exhaustMap((action) =>
+        employeesApiService
+          .changeEmployee(action.id, action.employeeAttributes)
+          .pipe(
+            map((employee) => {
+              console.log(employee);
+              return EmployeesActions.EmployeeChangedSuccess({
+                employee: employee,
+              });
+            }),
+            catchError(() => of(EmployeesActions.EmployeeChangedError()))
+          )
       )
     );
   },

@@ -33,6 +33,7 @@ export class FormatService {
       },
     };
   }
+
   formatEmployeesResponse(response: IEmployeeDTO[]): IEmployee[] {
     return response.map((elem) => ({
       id: elem.id,
@@ -41,5 +42,15 @@ export class FormatService {
         skills: elem.skills.map((elem: any) => elem.name).toString(),
       },
     }));
+  }
+
+  formatEmployeeResponse(employee: IEmployeeDTO): IEmployee {
+    return {
+      id: employee.id,
+      attributes: {
+        ...employee,
+        skills: employee.skills.map((elem) => elem.id),
+      },
+    };
   }
 }

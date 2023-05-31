@@ -33,7 +33,6 @@ import { IOption } from '../../interfaces/common.interface';
     TextareaComponent,
     ReactiveFormsModule,
     SelectComponent,
-    TextareaComponent,
   ],
 })
 export class ProjectFormComponent extends BaseControl {

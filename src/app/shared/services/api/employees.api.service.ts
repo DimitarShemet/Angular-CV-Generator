@@ -1,8 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IEmployee, IEmployeeDTO } from '../../interfaces/employee.interface';
+import {
+  IEmployee,
+  IEmployeeAttributes,
+  IEmployeeDTO,
+} from '../../interfaces/employee.interface';
 import { FormatService } from '../format.service';
 
 @Injectable({
@@ -18,5 +22,23 @@ export class EmployeesApiService {
           return this.formatService.formatEmployeesResponse(employees);
         })
       );
+  }
+
+  getEmployeeById(id: number): Observable<IEmployee> {
+    return this.http
+      .get<IEmployeeDTO>(
+        environment.BACKEND_URL + '/api/users/' + id + '?populate=*'
+      )
+      .pipe(
+        map((employee) => this.formatService.formatEmployeeResponse(employee))
+      );
+  }
+  changeEmployee(id: number, employeeAttributes: IEmployeeAttributes) {
+    return this.http
+      .put<IEmployeeDTO>(
+        environment.BACKEND_URL + '/api/users/' + id + '?populate=*',
+        employeeAttributes
+      )
+      .pipe(map((elem) => this.formatService.formatEmployeeResponse(elem)));
   }
 }

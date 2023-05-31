@@ -1,56 +1,57 @@
 <div [formGroup]="formControl">
-  <div class="project__form_row">
+  <div class="form__row">
     <app-input
       formControlName="name"
       placeholder="type name of project"
       label="Name"
-      class="project__form_item"
+      class="form__item"
     ></app-input>
     <app-datepicker
       formControlName="from"
       label="Start date"
-      class="project__form_item"
+      class="form__item"
     ></app-datepicker>
     <app-datepicker
       formControlName="to"
       class="project__form_item"
       label="End date"
+      class="form__item"
     ></app-datepicker>
     <app-input
       formControlName="domain"
       placeholder="domain"
       label="Domain"
-      class="project__form_item"
+      class="form__item"
     ></app-input>
   </div>
-  <div class="project__form_row">
+  <div class="form__row">
     <app-select
       [listOfOption]="skillsOption | async"
       formControlName="skills"
       placeholder="Type skills"
-      class="project__form_item"
+      class="form__item"
       label="Skills"
     ></app-select>
     <app-select
       [listOfOption]="responsibilitiesOption | async"
       formControlName="responsibilities"
       placeholder="Responsibilities"
-      class="project__form_item"
+      class="form__item"
       label="Responsibilities"
     ></app-select>
+  </div>
+  <div class="form__row">
     <app-input
       formControlName="internalName"
       placeholder=" type internalName"
       label="InternalName"
-      class="project__form_item"
+      class="form__item"
     ></app-input>
-  </div>
-  <div class="project__form_row">
     <app-textarea
       formControlName="description"
       label="Description"
       placeholder="type description of project"
-      class="project__form_item"
+      class="form__item"
     ></app-textarea>
   </div>
 </div>

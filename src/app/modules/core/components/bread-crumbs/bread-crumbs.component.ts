@@ -33,7 +33,8 @@ export class BreadcrumbComponents implements OnInit {
         const isDynamicRoute = Boolean(Number(lastRoutePart));
         if (isDynamicRoute) {
           this.projectsApiService
-            .getProjectById(+lastRoutePart)
+            .getProjectById(+40)
+            // .getProjectById(+lastRoutePart)
             .pipe(map((project: IProject) => project.attributes.name))
             .subscribe((projectName: string) => {
               this.name = projectName;

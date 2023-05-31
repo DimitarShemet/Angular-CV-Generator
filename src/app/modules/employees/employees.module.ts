@@ -12,15 +12,13 @@ import { EmployeeFormComponent } from './components/employee-form/employee-form.
 import { TranslateModule } from '@ngx-translate/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TabsComponent } from 'src/app/shared/components/tabs/tabs.component';
 
 @NgModule({
   declarations: [
     EmployeesPageComponent,
     EmployeeCreatePageComponent,
     EmployeeEditPageComponent,
-    EmployeeEditInfoComponent,
-    EmployeeEditCvComponent,
-    EmployeeFormComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TranslateModule,
     NzButtonModule,
     ReactiveFormsModule,
+    TabsComponent,
   ],
 })
 export class EmployeesModule {}
