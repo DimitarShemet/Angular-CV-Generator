@@ -7,6 +7,7 @@ import { IErrorsMessage } from '../interfaces/errors-message.interface';
 })
 export class GetErrorMessagePipe implements PipeTransform {
   transform(value: IErrorsMessage): string | null {
+    console.log(value);
     if (value) {
       const errorKey = Object.keys(value)[0];
       if (errorKey in VALIDATION_ERRORS) {

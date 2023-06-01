@@ -26,6 +26,7 @@ export interface IProjectDTOAttributes {
 export interface IProject {
   id: number;
   attributes: IProjectAttributes;
+  name?: string;
 }
 
 export interface IProjectAttributes {

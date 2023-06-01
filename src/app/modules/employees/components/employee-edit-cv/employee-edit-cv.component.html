@@ -1,10 +1,10 @@
-<div class="wrapper" [formGroup]="form">
+<div class="wrapper">
   <div class="cv__wrapper">
     <nz-tabset nzTabPosition="left">
       <nz-tab
-        *ngFor="let cv of employee.attributes.cvs; index as i"
+        *ngFor="let cv of employee.attributes.cvs"
         [nzTitle]="titleTemplate"
-        (nzClick)="selectCv(i)"
+        (nzClick)="selectCv(cv)"
       >
         <ng-template #titleTemplate>
           <span> {{ cv.name }}</span>
@@ -13,10 +13,40 @@
       </nz-tab>
     </nz-tabset>
   </div>
-  <div class="forms__wrapper">
+  <div class="forms__wrapper" [formGroup]="form">
     <app-employee-form
       formControlName="employeeFormControl"
     ></app-employee-form>
-    <app-project-form formControlName="projectFormControl"></app-project-form>
+    <nz-collapse>
+      <nz-collapse-panel
+        *ngFor="let project of selectedCv.projects"
+        (nzActiveChange)="selectProject(project)"
+        [nzHeader]="project.name"
+      >
+        <app-project-form
+          formControlName="projectFormControl"
+        ></app-project-form>
+      </nz-collapse-panel>
+    </nz-collapse>
+    <div class="form__footer">
+      <button
+        nz-button
+        nzType="primary"
+        nzSize="default"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        Save
+      </button>
+      <button
+        type="button"
+        nz-button
+        nzType="default"
+        nzSize="default"
+        [routerLink]="employeesPagePath"
+      >
+        Cancel
+      </button>
+    </div>
   </div>
 </div>
