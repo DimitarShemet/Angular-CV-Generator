@@ -23,6 +23,9 @@ nz-spin {
   flex-direction: column;
   height: 100%;
 }
+nz-select {
+  min-width: 123px;
+}
 .ant-spin-container {
   display: flex;
   flex-direction: column;
@@ -74,11 +77,19 @@ nz-tabset {
 .ant-tabs-content {
   height: 100%;
 }
-nz-collapse {
-  width: 650px;
+// nz-collapse {
+//   width: 820px;
+// }
+nz-tabset {
+  height: 100%;
 }
-ant-collapse-content {
-  animation: none;
+
+nz-tabset:has(nz-tabs-nav[ng-reflect-selected-index="1"]) {
+  height: auto;
+}
+
+svg {
+  transform: rotate(0) !important;
 }
 // Override less variables to here
 // View all variables: https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/style/themes/default.less

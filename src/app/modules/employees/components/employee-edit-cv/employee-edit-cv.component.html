@@ -17,15 +17,23 @@
     <app-employee-form
       formControlName="employeeFormControl"
     ></app-employee-form>
-    <nz-collapse>
+    <nz-collapse nzExpandIconPosition="right">
       <nz-collapse-panel
-        *ngFor="let project of selectedCv.projects"
-        (nzActiveChange)="selectProject(project)"
-        [nzHeader]="project.name"
+        formArrayName="projects"
+        *ngFor="let project of projects.controls; let i = index"
+        [nzHeader]="selectedCv.projects[i].name"
+        [nzExpandedIcon]="expandedIcon"
       >
-        <app-project-form
-          formControlName="projectFormControl"
-        ></app-project-form>
+        <ng-template #expandedIcon>
+          <span
+            nz-icon
+            nzType="delete"
+            class="ant-collapse-arrow"
+            (click)="deleteProject(i)"
+          ></span>
+        </ng-template>
+
+        <app-project-form [formControlName]="i"></app-project-form>
       </nz-collapse-panel>
     </nz-collapse>
     <div class="form__footer">
@@ -48,5 +56,6 @@
         Cancel
       </button>
     </div>
+    <button (click)="addProject()">Добавить проект!!!</button>
   </div>
 </div>

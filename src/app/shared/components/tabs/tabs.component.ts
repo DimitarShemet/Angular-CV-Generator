@@ -7,7 +7,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { EmployeeEditCvComponent } from 'src/app/modules/employees/components/employee-edit-cv/employee-edit-cv.component';
 import { EmployeeEditInfoComponent } from 'src/app/modules/employees/components/employee-edit-info/employee-edit-info.component';
-import { EmployeeFormComponent } from 'src/app/modules/employees/components/employee-form/employee-form.component';
+import { EmployeeFormComponent } from 'src/app/shared/components/employee-form/employee-form.component';
 import { changeEmployee } from 'src/app/store/actions/employees-actions';
 import { ModulePath } from '../../enums/routing-path.enums';
 import { ICv } from '../../interfaces/cv.interface';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EmployeeFormComponent } from '../employee-form/employee-form.component';
+import { EmployeeFormComponent } from '../../../../shared/components/employee-form/employee-form.component';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
