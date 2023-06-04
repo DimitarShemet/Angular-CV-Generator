@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { ItableColumns } from '../../interfaces/table-columns.interface';
@@ -20,7 +27,6 @@ export class TableComponent {
   @Output() sendItemId = new EventEmitter<number>();
 
   clickItem(id: number) {
-    console.log(id);
     this.sendItemId.emit(id);
   }
 }

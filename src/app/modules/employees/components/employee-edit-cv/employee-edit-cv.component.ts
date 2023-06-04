@@ -3,20 +3,25 @@ import { Component, Input, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
+  FormControl,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { ProjectFormComponent } from 'src/app/shared/components/project-form/project-form.component';
+import { FormDirective } from 'src/app/shared/directives/focus-invalid-field.directive';
+import { ModulePath } from 'src/app/shared/enums/routing-path.enums';
 import { ICv } from 'src/app/shared/interfaces/cv.interface';
 import { IEmployee } from 'src/app/shared/interfaces/employee.interface';
+import {
+  changeEmployeeCv,
+  loadEmployees,
+} from 'src/app/store/actions/employees-actions';
 import { EmployeeFormComponent } from '../../../../shared/components/employee-form/employee-form.component';
-import { NzCollapseModule } from 'ng-zorro-antd/collapse';
-import { IProject } from 'src/app/shared/interfaces/project.interface';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { RouterModule } from '@angular/router';
-import { ModulePath } from 'src/app/shared/enums/routing-path.enums';
 @Component({
   selector: 'app-employee-edit-cv',
   templateUrl: './employee-edit-cv.component.html',
@@ -32,53 +37,84 @@ import { ModulePath } from 'src/app/shared/enums/routing-path.enums';
     NzCollapseModule,
     NzButtonModule,
     RouterModule,
+    FormDirective,
   ],
 })
 export class EmployeeEditCvComponent implements OnInit {
   @Input() employee: IEmployee;
+  cvs: ICv[];
   selectedCv: ICv;
   employeesPagePath = ModulePath.EmployeesFullPath;
   form = this.fb.group({
-    employeeFormControl: [null],
+    employee: [null],
     projects: this.fb.array([]),
   });
 
-  get projects() {
+  get projectsForm() {
     return this.form.controls.projects as FormArray;
   }
 
-  constructor(private fb: FormBuilder) {}
+  get employeeForm() {
+    return this.form.controls.employee as FormControl;
+  }
+
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.store.dispatch(loadEmployees());
+    this.cvs = this.employee.attributes.cvs;
     this.selectedCv = this.employee.attributes.cvs[0];
-    this.form.controls.employeeFormControl.patchValue(this.selectedCv);
-    this.selectedCv.projects.forEach((elem) =>
-      this.projects.push(this.fb.control(''))
+    this.employeeForm.patchValue(this.selectedCv);
+    this.selectedCv.projects.forEach(() =>
+      this.projectsForm.push(this.fb.control(''))
     );
-    this.projects.patchValue(this.selectedCv.projects);
-    // this.form.statusChanges.subscribe((form) => {
-    //   console.log(form);
-    // });
-    // this.form.valueChanges.subscribe((form) => {
-    //   console.log(form);
-    // });
+    this.projectsForm.patchValue(this.selectedCv.projects);
   }
 
   selectCv(cv: ICv) {
     this.selectedCv = cv;
-    this.form.controls.employeeFormControl.patchValue(cv);
-    this.projects.clear();
-    cv.projects.forEach(() => this.projects.push(this.fb.control('')));
+    this.employeeForm.patchValue(cv);
+    this.projectsForm.clear();
+    cv.projects.forEach(() => this.projectsForm.push(this.fb.control('')));
     this.form.controls.projects.patchValue(cv.projects);
   }
 
-  selectProject(project: IProject) {}
-
   addProject() {
-    this.projects.push(this.fb.control('', Validators.required));
+    // this.projects.push(this.fb.control('', Validators.required));
   }
 
   deleteProject(index: number) {
-    this.projects.removeAt(index);
+    this.projectsForm.removeAt(index);
+  }
+
+  deleteCv(id: number) {
+    const newCvs = [...this.cvs];
+    this.cvs = newCvs.filter((elem) => elem.id !== id);
+  }
+
+  submitForm() {
+    const newCvs = [...this.cvs];
+    console.log(newCvs);
+    const currentCvIndex = newCvs.findIndex(
+      (elem) => elem.id === this.selectedCv.id
+    );
+    console.log(currentCvIndex);
+    newCvs[currentCvIndex] = {
+      id: this.selectedCv.id,
+      name: this.selectedCv.name,
+      ...this.employeeForm.value,
+      projects: [...this.projectsForm.value],
+    };
+    this.store.dispatch(
+      changeEmployeeCv({
+        employeeId: this.employee.id,
+        cvs: newCvs,
+      })
+    );
+    this.router.navigate([this.employeesPagePath]);
   }
 }

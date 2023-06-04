@@ -10,5 +10,20 @@ export const employeesReducer = createReducer(
   on(EmployeesActions.employeesLoadedSuccess, (state, { employees }) => ({
     ...state,
     employees: employees,
-  }))
+  })),
+
+  on(EmployeesActions.EmployeeChangedCvSuccess, (state, { employee }) => {
+    // const updatedEmployees = [...state.employees];
+    // const employeeIndex =
+    //   updatedEmployees.findIndex((elem) => elem.id === employee.id) + 1;
+    // console.log(employeeIndex);
+    // updatedEmployees[employeeIndex] = {
+    //   ...employee,
+    // };
+
+    return {
+      ...state,
+      employees: [employee],
+    };
+  })
 );

@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { ICv } from 'src/app/shared/interfaces/cv.interface';
 import {
   IEmployee,
   IEmployeeAttributes,
@@ -15,16 +16,27 @@ export const employeesLoadedError = createAction(
   '[Employees Page] Employees Loaded Error'
 );
 
-export const changeEmployee = createAction(
-  '[Employee Change Page]  Change Employee',
+export const changeEmployeeInfo = createAction(
+  '[Employee Change Info Tab]  Change Employee Info',
   props<{ id: number; employeeAttributes: IEmployeeAttributes }>()
 );
 
-export const EmployeeChangedSuccess = createAction(
-  '[Employee Change Page] Employee Changed Success',
+export const employeeChangedInfoSuccess = createAction(
+  '[Employee Change Info Tab] Employee Changed Info Success',
   props<{ employee: IEmployee }>()
 );
 
-export const EmployeeChangedError = createAction(
-  '[Employee Change Page]   Employee Changed Error'
+export const employeeChangedInfoError = createAction(
+  '[Employee Change Info  Tab] Employee Changed  Info Error'
+);
+export const changeEmployeeCv = createAction(
+  '[Employee Change Cv Tab] Change Employee Cv',
+  props<{ employeeId: number; cvs: ICv[] }>()
+);
+export const EmployeeChangedCvSuccess = createAction(
+  '[Employee Change Cv Tab] Employee Cv Changed Success',
+  props<{ employee: IEmployee }>()
+);
+export const employeeChangedCvError = createAction(
+  '[Employee Change Cv Tab] Employee Cv  Changed Error'
 );

@@ -13,7 +13,6 @@ export const getResponsibilities = createEffect(
       exhaustMap(() =>
         responsibilitiesApiService.getResponsibilities().pipe(
           map((responsibilitiesResponsePayload) => {
-            console.log(responsibilitiesResponsePayload);
             return ResponsibilitiesActions.getResponsibilitiesSuccess({
               responsibilities: responsibilitiesResponsePayload,
             });

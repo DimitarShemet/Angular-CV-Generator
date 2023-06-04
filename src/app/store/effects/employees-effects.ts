@@ -26,24 +26,52 @@ export const loadEmployees = createEffect(
   { functional: true }
 );
 
-export const changeEmployee = createEffect(
+export const changeEmployeeInfo = createEffect(
   (
     actions$ = inject(Actions),
     employeesApiService = inject(EmployeesApiService)
   ) => {
     return actions$.pipe(
-      ofType(EmployeesActions.changeEmployee),
+      ofType(EmployeesActions.changeEmployeeInfo),
       exhaustMap((action) =>
         employeesApiService
-          .changeEmployee(action.id, action.employeeAttributes)
+          .changeEmployeeInfo(action.id, action.employeeAttributes)
           .pipe(
             map((employee) => {
               console.log(employee);
-              return EmployeesActions.EmployeeChangedSuccess({
+              return EmployeesActions.employeeChangedInfoSuccess({
                 employee: employee,
               });
             }),
-            catchError(() => of(EmployeesActions.EmployeeChangedError()))
+            catchError(() => of(EmployeesActions.employeeChangedInfoError()))
+          )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const changeEmployeeCv = createEffect(
+  (
+    actions$ = inject(Actions),
+    employeesApiService = inject(EmployeesApiService)
+  ) => {
+    return actions$.pipe(
+      ofType(EmployeesActions.changeEmployeeCv),
+      exhaustMap((action) =>
+        employeesApiService
+          .changeEmployeeCv(action.employeeId, action.cvs)
+          .pipe(
+            map((employeeAttributes) => {
+              console.log(employeeAttributes);
+              return EmployeesActions.EmployeeChangedCvSuccess({
+                employee: {
+                  id: employeeAttributes.id,
+                  attributes: employeeAttributes,
+                },
+              });
+            }),
+            catchError(() => of(EmployeesActions.employeeChangedCvError()))
           )
       )
     );

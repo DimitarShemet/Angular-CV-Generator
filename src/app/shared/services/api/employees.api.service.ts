@@ -8,6 +8,7 @@ import {
   IEmployeeDTO,
 } from '../../interfaces/employee.interface';
 import { FormatService } from '../format.service';
+import { ICv } from '../../interfaces/cv.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -33,12 +34,18 @@ export class EmployeesApiService {
         map((employee) => this.formatService.formatEmployeeResponse(employee))
       );
   }
-  changeEmployee(id: number, employeeAttributes: IEmployeeAttributes) {
+  changeEmployeeInfo(id: number, employeeAttributes: IEmployeeAttributes) {
     return this.http
       .put<IEmployeeDTO>(
         environment.BACKEND_URL + '/api/users/' + id + '?populate=*',
         employeeAttributes
       )
-      .pipe(map((elem) => this.formatService.formatEmployeeResponse(elem)));
+      .pipe(map((elem) => this.formatService.formatEmployeeResponse(elem))); //delete и посмотреть на ээфект
+  }
+  changeEmployeeCv(employeeId: number, cvs: ICv[]) {
+    return this.http.put<IEmployeeAttributes>(
+      environment.BACKEND_URL + '/api/users/' + employeeId + '?populate=*',
+      { cvs: cvs }
+    );
   }
 }

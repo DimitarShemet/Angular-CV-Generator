@@ -2,25 +2,38 @@
   <div class="cv__wrapper">
     <nz-tabset nzTabPosition="left">
       <nz-tab
-        *ngFor="let cv of employee.attributes.cvs"
+        *ngFor="let cv of cvs"
         [nzTitle]="titleTemplate"
         (nzClick)="selectCv(cv)"
       >
         <ng-template #titleTemplate>
           <span> {{ cv.name }}</span>
-          <span nz-icon nzType="delete" nzTheme="outline"></span>
+          <span
+            nz-icon
+            nzType="delete"
+            nzTheme="outline"
+            (click)="deleteCv(cv.id)"
+          ></span>
         </ng-template>
       </nz-tab>
     </nz-tabset>
   </div>
-  <div class="forms__wrapper" [formGroup]="form">
-    <app-employee-form
-      formControlName="employeeFormControl"
-    ></app-employee-form>
+  <form class="forms__wrapper" [formGroup]="form" (ngSubmit)="submitForm()">
+    <app-employee-form formControlName="employee"></app-employee-form>
+    <button
+      nz-button
+      nzType="primary"
+      nzSize="default"
+      type="button"
+      class="project__btn"
+      (click)="addProject()"
+    >
+      Add project
+    </button>
     <nz-collapse nzExpandIconPosition="right">
       <nz-collapse-panel
         formArrayName="projects"
-        *ngFor="let project of projects.controls; let i = index"
+        *ngFor="let project of projectsForm.controls; let i = index"
         [nzHeader]="selectedCv.projects[i].name"
         [nzExpandedIcon]="expandedIcon"
       >
@@ -30,6 +43,7 @@
             nzType="delete"
             class="ant-collapse-arrow"
             (click)="deleteProject(i)"
+            [nzRotate]="0"
           ></span>
         </ng-template>
 
@@ -56,6 +70,5 @@
         Cancel
       </button>
     </div>
-    <button (click)="addProject()">Добавить проект!!!</button>
-  </div>
+  </form>
 </div>
