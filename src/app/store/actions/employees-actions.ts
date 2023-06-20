@@ -40,3 +40,13 @@ export const EmployeeChangedCvSuccess = createAction(
 export const employeeChangedCvError = createAction(
   '[Employee Change Cv Tab] Employee Cv  Changed Error'
 );
+export const createEmployee = createAction(
+  '[Employee Create Page] Create Employee',
+  props<{ employeeAttributes: IEmployeeAttributes }>()
+);
+export const createEmployeeSuccess = createAction(
+  '[Employee Create Page] Employee Created Success'
+);
+export const createEmployeeError = createAction(
+  '[Employee Create Page] Employee Created Eror'
+);

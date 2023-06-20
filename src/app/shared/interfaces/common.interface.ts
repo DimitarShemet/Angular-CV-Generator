@@ -1,5 +1,5 @@
 export interface IData<T, Y> {
-  data: {
+  data?: {
     id: T;
     attributes: {
       name: Y;

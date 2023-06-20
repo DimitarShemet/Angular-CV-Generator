@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="cv__wrapper">
-    <nz-tabset nzTabPosition="left">
+    <nz-tabset nzTabPosition="left" [(nzSelectedIndex)]="tabIndex">
       <nz-tab
         *ngFor="let cv of cvs"
         [nzTitle]="titleTemplate"
@@ -17,6 +17,9 @@
         </ng-template>
       </nz-tab>
     </nz-tabset>
+    <button nz-button nzShape="circle" nzType="primary" (click)="addCv()">
+      <span nz-icon nzType="plus" nzTheme="outline"></span>
+    </button>
   </div>
   <form class="forms__wrapper" [formGroup]="form" (ngSubmit)="submitForm()">
     <app-employee-form formControlName="employee"></app-employee-form>
@@ -32,9 +35,10 @@
     </button>
     <nz-collapse nzExpandIconPosition="right">
       <nz-collapse-panel
+        @deleteProject
         formArrayName="projects"
         *ngFor="let project of projectsForm.controls; let i = index"
-        [nzHeader]="selectedCv.projects[i].name"
+        [nzHeader]="selectedCv.projects[i]?.name"
         [nzExpandedIcon]="expandedIcon"
       >
         <ng-template #expandedIcon>
@@ -44,6 +48,7 @@
             class="ant-collapse-arrow"
             (click)="deleteProject(i)"
             [nzRotate]="0"
+            (click)="$event.stopPropagation()"
           ></span>
         </ng-template>
 

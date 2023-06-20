@@ -1,6 +1,8 @@
 <div class="router__outlet_wrapper">
   <div class="router__outlet_inner">
-    <button nz-button nzType="primary">Add Employee</button>
+    <button nz-button nzType="primary">
+      <a [routerLink]="employeeCreatePath">Add Employee</a>
+    </button>
 
     <app-table
       (sendItemId)="openEmployeeEditPage($event)"

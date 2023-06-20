@@ -11,9 +11,6 @@ import { IProject } from '../interfaces/project.interface';
 })
 export class EmployeeService {
   constructor() {}
-  //   findSelectedCvIndex(cvs: ICv[], id: number): number {
-  //     return cvs.findIndex((elem) => elem.id === id);
-  //   }
   updateCvs(
     cvs: ICv[],
     id: number,
@@ -29,5 +26,13 @@ export class EmployeeService {
       ...employee,
       projects: projects,
     };
+  }
+  getNewId(cvs: ICv[]): number {
+    return cvs
+      ? cvs.reduce((maxId, cv) => {
+          const currId = cv.id;
+          return currId > maxId ? currId : maxId;
+        }, 0) + 1
+      : 0;
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
@@ -10,15 +10,15 @@ import { logIn } from 'src/app/store/actions/auth-actions';
   styleUrls: ['./auth-form.component.scss'],
 })
 export class AuthFormComponent {
-  constructor(
-    private fb: FormBuilder,
-
-    private store: Store
-  ) {}
   form = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],
   });
+
+  constructor(private fb: FormBuilder, private store: Store) {}
+
+  @Output() enableSpinner = new EventEmitter<boolean>();
+
   submitForm() {
     this.store.dispatch(
       logIn({
@@ -28,5 +28,6 @@ export class AuthFormComponent {
         },
       })
     );
+    this.enableSpinner.emit(true);
   }
 }

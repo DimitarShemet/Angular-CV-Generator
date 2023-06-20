@@ -48,4 +48,24 @@ export class EmployeesApiService {
       { cvs: cvs }
     );
   }
+
+  createEmployee(employeeAttributes: IEmployeeAttributes) {
+    console.log({
+      ...employeeAttributes,
+      username: employeeAttributes.firstName,
+      password: 123456,
+      role: [{ id: 1 }],
+    });
+    return this.http.post<IEmployeeAttributes>(
+      environment.BACKEND_URL + '/api/users/' + '?populate=*',
+      {
+        ...employeeAttributes,
+        username: employeeAttributes.firstName,
+        password: '123456',
+        role: {
+          connect: [{ id: 1 }],
+        },
+      }
+    );
+  }
 }

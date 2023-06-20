@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./auth-page.component.scss'],
 })
 export class AuthPageComponent {
+  isSpinning = false;
   constructor() {}
+
+  enableSpinner(condition: boolean) {
+    this.isSpinning = condition;
+  }
 }

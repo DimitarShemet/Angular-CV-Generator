@@ -78,3 +78,29 @@ export const changeEmployeeCv = createEffect(
   },
   { functional: true }
 );
+
+export const createEmployee = createEffect(
+  (
+    actions$ = inject(Actions),
+    employeesApiService = inject(EmployeesApiService)
+  ) => {
+    return actions$.pipe(
+      ofType(EmployeesActions.createEmployee),
+      exhaustMap((action) =>
+        employeesApiService.createEmployee(action.employeeAttributes).pipe(
+          map((employeeAttributes) => {
+            console.log(employeeAttributes);
+            return EmployeesActions.EmployeeChangedCvSuccess({
+              employee: {
+                id: employeeAttributes.id,
+                attributes: employeeAttributes,
+              },
+            });
+          }),
+          catchError(() => of(EmployeesActions.employeeChangedCvError()))
+        )
+      )
+    );
+  },
+  { functional: true }
+);

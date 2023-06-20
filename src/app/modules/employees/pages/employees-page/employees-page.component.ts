@@ -16,6 +16,8 @@ import { employeesSelector } from 'src/app/store/selectors/employees-selectors';
 })
 export class EmployeesPageComponent implements OnInit {
   $employees: Observable<IEmployee[]> = this.store.select(employeesSelector);
+  employeeCreatePath =
+    ModulePath.EmployeesFullPath + PagePath.EmployeeCreateFullPath;
 
   constructor(private store: Store, private router: Router) {}
 

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -21,6 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NzButtonModule,
     AuthRoutingModule,
     TranslateModule,
+    NzSpinModule,
   ],
 })
 export class AuthModule {}

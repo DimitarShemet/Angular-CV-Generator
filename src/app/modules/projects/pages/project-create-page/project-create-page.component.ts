@@ -16,7 +16,7 @@ export class ProjectCreatePageComponent {
 
   constructor(fb: FormBuilder, public store: Store, private router: Router) {
     this.form = fb.group({
-      projectForm: [null, Validators.required],
+      projectForm: [null],
     });
   }
 

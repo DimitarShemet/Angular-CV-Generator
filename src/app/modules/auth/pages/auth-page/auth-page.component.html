@@ -14,6 +14,7 @@
       />
     </svg>
   </span>
+  <nz-spin nzSimple [nzSize]="'large'" [nzSpinning]="isSpinning"></nz-spin>
   <div class="login__wrapper">
     <div class="login__title">
       <span class="logo">
@@ -103,8 +104,9 @@
       </span>
       <span>Ant Design</span>
     </div>
-    <auth-form></auth-form>
+    <auth-form (enableSpinner)="enableSpinner($event)"></auth-form>
   </div>
+
   <span class="question__icon">
     <svg
       width="56"

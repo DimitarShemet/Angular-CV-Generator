@@ -5,18 +5,17 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { Observable } from 'rxjs';
 import { EmployeeEditCvComponent } from 'src/app/modules/employees/components/employee-edit-cv/employee-edit-cv.component';
-import { EmployeeEditInfoComponent } from 'src/app/modules/employees/components/employee-edit-info/employee-edit-info.component';
 import { EmployeeFormComponent } from 'src/app/shared/components/employee-form/employee-form.component';
 import {
   changeEmployeeInfo,
+  createEmployee,
   loadEmployees,
 } from 'src/app/store/actions/employees-actions';
-import { ModulePath } from '../../enums/routing-path.enums';
-import { ICv } from '../../interfaces/cv.interface';
-import { IEmployee } from '../../interfaces/employee.interface';
-import { Observable } from 'rxjs';
 import { employeesSelector } from 'src/app/store/selectors/employees-selectors';
+import { ModulePath } from '../../enums/routing-path.enums';
+import { IEmployee } from '../../interfaces/employee.interface';
 
 @Component({
   selector: 'app-tabs',
@@ -26,7 +25,6 @@ import { employeesSelector } from 'src/app/store/selectors/employees-selectors';
   imports: [
     NzTabsModule,
     CommonModule,
-    EmployeeEditInfoComponent,
     EmployeeEditCvComponent,
     EmployeeFormComponent,
     ReactiveFormsModule,
@@ -44,26 +42,35 @@ export class TabsComponent implements OnInit {
     private router: Router,
     private store: Store
   ) {}
-  employee: IEmployee;
+  employee?: IEmployee;
   employeesPagePath = ModulePath.EmployeesFullPath;
   employees: Observable<IEmployee[]> = this.store.select(employeesSelector);
+
   ngOnInit(): void {
     this.store.dispatch(loadEmployees());
+    this.employeeForm.valueChanges.subscribe((elem) => {
+      console.log(elem);
+    });
+
     this.route.data.subscribe((data) => {
-      this.employeeForm
-        .get('employeeFormControl')
-        .patchValue(data['employee'].attributes);
+      data['employee'] &&
+        this.employeeForm
+          .get('employeeFormControl')
+          .patchValue(data['employee'].attributes);
       this.employee = data['employee'];
     });
   }
+
   submitEmployeeForm() {
     const formValue = this.employeeForm.controls.employeeFormControl.value;
-    this.store.dispatch(
-      changeEmployeeInfo({
-        id: this.employee.id,
-        employeeAttributes: formValue,
-      })
-    );
+    this.employee
+      ? this.store.dispatch(
+          changeEmployeeInfo({
+            id: this.employee.id,
+            employeeAttributes: formValue,
+          })
+        )
+      : this.store.dispatch(createEmployee({ employeeAttributes: formValue })); // здесь formValue-заменить на реальные данные нового employee
     this.router.navigate([this.employeesPagePath]);
   }
 }
