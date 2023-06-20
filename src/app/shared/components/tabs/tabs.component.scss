@@ -12,5 +12,7 @@ form {
 button {
   align-self: flex-end;
   margin-right: 25px;
-  margin-bottom: 30px;
+}
+button:last-child {
+  margin-right: 0;
 }

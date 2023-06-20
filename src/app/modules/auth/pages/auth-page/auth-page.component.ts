@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-auth-page',
@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AuthPageComponent {
   isSpinning = false;
+  @ViewChild('wrap') wrap: ElementRef;
   constructor() {}
 
   enableSpinner(condition: boolean) {
