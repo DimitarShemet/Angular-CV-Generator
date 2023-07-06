@@ -1,18 +1,11 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
   FormControl,
+  FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -20,20 +13,21 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { addRemoveProject } from 'src/app/shared/animations/animations';
 import { ProjectFormComponent } from 'src/app/shared/components/project-form/project-form.component';
 import { FormDirective } from 'src/app/shared/directives/focus-invalid-field.directive';
 import { ModulePath } from 'src/app/shared/enums/routing-path.enums';
 import { ICv } from 'src/app/shared/interfaces/cv.interface';
 import { IEmployee } from 'src/app/shared/interfaces/employee.interface';
+import { EmployeeService } from 'src/app/shared/services/employee.service';
 import {
   changeEmployeeCv,
   createEmployee,
   loadEmployees,
 } from 'src/app/store/actions/employees-actions';
 import { EmployeeFormComponent } from '../../../../shared/components/employee-form/employee-form.component';
+import { ICvForm } from 'src/app/shared/interfaces/cv-form.interface';
 import { IProject } from 'src/app/shared/interfaces/project.interface';
-import { ISkills } from 'src/app/shared/interfaces/skills.interface';
-import { EmployeeService } from 'src/app/shared/services/employee.service';
 @Component({
   selector: 'app-employee-edit-cv',
   templateUrl: './employee-edit-cv.component.html',
@@ -50,21 +44,9 @@ import { EmployeeService } from 'src/app/shared/services/employee.service';
     NzButtonModule,
     RouterModule,
     FormDirective,
+    FormsModule,
   ],
-  animations: [
-    trigger('deleteProject', [
-      state('start', style({ opacity: 1 })),
-      state('end', style({ opacity: 1 })),
-      transition(':leave', [
-        style({ opacity: 1 }),
-        animate('300ms', style({ opacity: 0 })),
-      ]),
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('300ms', style({ opacity: 1 })),
-      ]),
-    ]),
-  ],
+  animations: [addRemoveProject],
 })
 export class EmployeeEditCvComponent implements OnInit {
   @Input() employee?: IEmployee;
@@ -72,9 +54,9 @@ export class EmployeeEditCvComponent implements OnInit {
   selectedCv: ICv;
   employeesPagePath = ModulePath.EmployeesFullPath;
   projectState: string;
-  form = this.fb.group({
-    employee: [null],
-    projects: this.fb.array([]),
+  form = this.fb.group<ICvForm>({
+    employee: null,
+    projects: this.fb.array<IProject>([]),
   });
   tabIndex = 0;
 
@@ -127,7 +109,6 @@ export class EmployeeEditCvComponent implements OnInit {
 
   submitForm() {
     const newCvs = [...this.cvs];
-    console.log(newCvs);
     const currentCvIndex = newCvs.findIndex(
       (elem) => elem.id === this.selectedCv.id
     );
@@ -148,7 +129,7 @@ export class EmployeeEditCvComponent implements OnInit {
       : this.store.dispatch(
           createEmployee({
             employeeAttributes: {
-              ...this.form.controls.employee.value,
+              ...this.form.controls.employee?.value,
               cvs: newCvs,
             },
           })
@@ -156,19 +137,7 @@ export class EmployeeEditCvComponent implements OnInit {
     this.router.navigate([this.employeesPagePath]);
   }
   addCv() {
-    console.log(this.cvs);
-    const newId = this.employeeService.getNewId(this.cvs);
-    const newCv = {
-      id: newId,
-      name: 'new CV',
-      firstName: '',
-      lastName: '',
-      description: '',
-      email: '',
-      skills: [] as ISkills,
-      projects: [] as IProject[],
-    };
-    const newCvs = this.cvs ? [...this.cvs, newCv] : [newCv];
+    const newCvs = this.employeeService.getNewCvs(this.cvs);
     const lastCvIndex = newCvs.length - 1;
     this.cvs = newCvs;
     this.selectCv(newCvs[lastCvIndex]);

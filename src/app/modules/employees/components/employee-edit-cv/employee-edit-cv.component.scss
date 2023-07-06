@@ -32,3 +32,14 @@ span:hover {
   align-self: flex-end;
   margin-bottom: 15px;
 }
+input {
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100px;
+}
+
+input:focus {
+  outline: 0;
+  cursor: pointer;
+}

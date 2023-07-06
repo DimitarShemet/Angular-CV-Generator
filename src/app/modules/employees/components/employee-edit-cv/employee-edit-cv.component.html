@@ -7,7 +7,9 @@
         (nzClick)="selectCv(cv)"
       >
         <ng-template #titleTemplate>
-          <span> {{ cv.name }}</span>
+          <span>
+            <input [(ngModel)]="cv.name" ngDefaultControl />
+          </span>
           <span
             nz-icon
             nzType="delete"

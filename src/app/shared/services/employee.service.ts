@@ -5,6 +5,7 @@ import {
   IEmployeeAttributes,
 } from '../interfaces/employee.interface';
 import { IProject } from '../interfaces/project.interface';
+import { ISkills } from '../interfaces/skills.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +35,19 @@ export class EmployeeService {
           return currId > maxId ? currId : maxId;
         }, 0) + 1
       : 0;
+  }
+  getNewCvs(cvs: ICv[]): ICv[] {
+    const newId = this.getNewId(cvs);
+    const newCv = {
+      id: newId,
+      name: 'new CV',
+      firstName: '',
+      lastName: '',
+      description: '',
+      email: '',
+      skills: [] as ISkills,
+      projects: [] as IProject[],
+    };
+    return cvs ? [...cvs, newCv] : [newCv];
   }
 }
