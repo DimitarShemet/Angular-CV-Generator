@@ -63,6 +63,7 @@ export class TabsComponent implements OnInit {
 
   submitEmployeeForm() {
     const formValue = this.employeeForm.controls.employeeFormControl.value;
+    console.log(formValue);
     this.employee
       ? this.store.dispatch(
           changeEmployeeInfo({
@@ -70,7 +71,14 @@ export class TabsComponent implements OnInit {
             employeeAttributes: formValue,
           })
         )
-      : this.store.dispatch(createEmployee({ employeeAttributes: formValue })); // здесь formValue-заменить на реальные данные нового employee
+      : this.store.dispatch(
+          createEmployee({
+            employeeAttributes: {
+              ...formValue,
+              username: formValue?.firstName,
+            },
+          })
+        );
     this.router.navigate([this.employeesPagePath]);
   }
 }

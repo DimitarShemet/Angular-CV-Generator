@@ -1,10 +1,6 @@
-// .validation {
-//   display: none;
-//   position: absolute;
-// }
-// .example {
-//   position: relative;
-// }
 :host {
   position: relative;
+}
+:host-context(.login__wrapper) .validation {
+  bottom: -20px;
 }

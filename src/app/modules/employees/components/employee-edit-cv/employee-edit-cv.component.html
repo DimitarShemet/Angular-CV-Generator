@@ -23,7 +23,12 @@
       <span nz-icon nzType="plus" nzTheme="outline"></span>
     </button>
   </div>
-  <form class="forms__wrapper" [formGroup]="form" (ngSubmit)="submitForm()">
+  <form
+    *ngIf="cvs?.length"
+    class="forms__wrapper"
+    [formGroup]="form"
+    (ngSubmit)="submitForm()"
+  >
     <app-employee-form formControlName="employee"></app-employee-form>
     <button
       nz-button

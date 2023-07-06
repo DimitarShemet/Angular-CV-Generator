@@ -17,8 +17,10 @@ import { addRemoveProject } from 'src/app/shared/animations/animations';
 import { ProjectFormComponent } from 'src/app/shared/components/project-form/project-form.component';
 import { FormDirective } from 'src/app/shared/directives/focus-invalid-field.directive';
 import { ModulePath } from 'src/app/shared/enums/routing-path.enums';
+import { ICvForm } from 'src/app/shared/interfaces/cv-form.interface';
 import { ICv } from 'src/app/shared/interfaces/cv.interface';
 import { IEmployee } from 'src/app/shared/interfaces/employee.interface';
+import { IProject } from 'src/app/shared/interfaces/project.interface';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
 import {
   changeEmployeeCv,
@@ -26,8 +28,6 @@ import {
   loadEmployees,
 } from 'src/app/store/actions/employees-actions';
 import { EmployeeFormComponent } from '../../../../shared/components/employee-form/employee-form.component';
-import { ICvForm } from 'src/app/shared/interfaces/cv-form.interface';
-import { IProject } from 'src/app/shared/interfaces/project.interface';
 @Component({
   selector: 'app-employee-edit-cv',
   templateUrl: './employee-edit-cv.component.html',
@@ -49,7 +49,6 @@ import { IProject } from 'src/app/shared/interfaces/project.interface';
   animations: [addRemoveProject],
 })
 export class EmployeeEditCvComponent implements OnInit {
-  @Input() employee?: IEmployee;
   cvs?: ICv[];
   selectedCv: ICv;
   employeesPagePath = ModulePath.EmployeesFullPath;
@@ -74,6 +73,8 @@ export class EmployeeEditCvComponent implements OnInit {
     private router: Router,
     private employeeService: EmployeeService
   ) {}
+
+  @Input() employee?: IEmployee;
 
   ngOnInit(): void {
     this.store.dispatch(loadEmployees());
