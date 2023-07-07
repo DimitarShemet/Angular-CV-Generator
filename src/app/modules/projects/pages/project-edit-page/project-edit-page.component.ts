@@ -28,7 +28,7 @@ export class ProjectEditPageComponent {
     private router: Router
   ) {
     this.form = fb.group({
-      projectForm: [null, Validators.required],
+      projectForm: null,
     });
   }
 
