@@ -5,4 +5,5 @@ import { IProject } from './project.interface';
 export interface ICvForm {
   employee: FormControl<IEmployeeAttributes>;
   projects: FormArray<FormControl<IProject>>;
+  selectedProject: FormControl<number>;
 }

@@ -30,22 +30,33 @@
     (ngSubmit)="submitForm()"
   >
     <app-employee-form formControlName="employee"></app-employee-form>
-    <button
-      nz-button
-      nzType="primary"
-      nzSize="default"
-      type="button"
-      class="project__btn"
-      (click)="addProject()"
-    >
-      Add project
-    </button>
+    <div>
+      <app-select
+        [listOfOption]="projectsOption$ | async"
+        formControlName="selectedProject"
+        placeholder="Select project"
+        class="form__item"
+        label="Select project"
+        [multiselection]="false"
+      >
+      </app-select>
+      <button
+        nz-button
+        nzType="primary"
+        nzSize="default"
+        type="button"
+        class="project__btn"
+        (click)="addProject()"
+      >
+        Add project
+      </button>
+    </div>
     <nz-collapse nzExpandIconPosition="right">
       <nz-collapse-panel
         @deleteProject
         formArrayName="projects"
         *ngFor="let project of projectsForm.controls; let i = index"
-        [nzHeader]="selectedCv.projects[i]?.name"
+        [nzHeader]="projectsForm?.controls[i]?.value?.name"
         [nzExpandedIcon]="expandedIcon"
       >
         <ng-template #expandedIcon>
