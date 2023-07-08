@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { NgControl, ReactiveFormsModule } from '@angular/forms';
-import { BaseControl } from '../../../classes/base-control.class';
 import { CommonModule } from '@angular/common';
-import { NzFormModule } from 'ng-zorro-antd/form';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { GetErrorMessagePipe } from 'src/app/shared/pipes/get-error-message.pipe';
+import { BaseControl } from '../../../classes/base-control.class';
 
 @Component({
   selector: 'app-datepicker',
@@ -19,6 +19,7 @@ import { GetErrorMessagePipe } from 'src/app/shared/pipes/get-error-message.pipe
     NzDatePickerModule,
     GetErrorMessagePipe,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatepickerComponent extends BaseControl {
   constructor(ngControl: NgControl, private i18n: NzI18nService) {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormBuilder,
   NgControl,
@@ -34,6 +34,7 @@ import { IOption } from '../../interfaces/common.interface';
     ReactiveFormsModule,
     SelectComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectFormComponent extends BaseControl {
   skillsOption: Observable<IOption[]> = this.store.select(skillsSelector);

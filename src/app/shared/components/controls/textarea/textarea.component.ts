@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { BaseControl } from '../../../classes/base-control.class';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -18,6 +18,7 @@ import { GetErrorMessagePipe } from 'src/app/shared/pipes/get-error-message.pipe
     NzFormModule,
     GetErrorMessagePipe,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaComponent extends BaseControl {
   constructor(NgControl: NgControl) {

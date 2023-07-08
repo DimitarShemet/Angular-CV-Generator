@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
@@ -8,6 +13,7 @@ import { logIn } from 'src/app/store/actions/auth-actions';
   selector: 'auth-form',
   templateUrl: './auth-form.component.html',
   styleUrls: ['./auth-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthFormComponent {
   form = this.fb.group({

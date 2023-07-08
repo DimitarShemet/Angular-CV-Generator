@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { Observable } from 'rxjs';
-import { EmployeeEditCvComponent } from 'src/app/modules/employees/components/employee-edit-cv/employee-edit-cv.component';
+import { EmployeeEditCvComponent } from 'src/app/shared/components/employee-edit-cv/employee-edit-cv.component';
 import { EmployeeFormComponent } from 'src/app/shared/components/employee-form/employee-form.component';
 import {
   changeEmployeeInfo,
@@ -31,6 +31,7 @@ import { IEmployee } from '../../interfaces/employee.interface';
     NzButtonModule,
     RouterModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsComponent implements OnInit {
   employeeForm = this.fb.group({

@@ -21,30 +21,29 @@ export class BreadcrumbComponents implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.router.events
-      .pipe(
-        filter(
-          (event): event is NavigationEnd => event instanceof NavigationEnd
-        ),
-        startWith(this.router)
-      )
-      .subscribe(() => {
-        const lastRoutePart = this.router.url.split('/').pop();
-        const isDynamicRoute = Boolean(Number(lastRoutePart));
-        if (isDynamicRoute) {
-          this.projectsApiService
-            .getProjectById(+40)
-            // .getProjectById(+lastRoutePart)
-            .pipe(map((project: IProject) => project.attributes.name))
-            .subscribe((projectName: string) => {
-              this.name = projectName;
-
-              this.breadcrumbs = this.buildBreadCrumb(this.activatedRoute.root);
-            });
-        } else {
-          this.breadcrumbs = this.buildBreadCrumb(this.activatedRoute.root);
-        }
-      });
+    // this.router.events
+    //   .pipe(
+    //     filter(
+    //       (event): event is NavigationEnd => event instanceof NavigationEnd
+    //     ),
+    //     startWith(this.router)
+    //   )
+    //   .subscribe(() => {
+    //     const lastRoutePart = this.router.url.split('/').pop();
+    //     const isDynamicRoute = Boolean(Number(lastRoutePart));
+    //     if (isDynamicRoute) {
+    //       this.projectsApiService
+    //         .getProjectById(+40)
+    //         // .getProjectById(+lastRoutePart)
+    //         .pipe(map((project: IProject) => project.attributes.name))
+    //         .subscribe((projectName: string) => {
+    //           this.name = projectName;
+    //           this.breadcrumbs = this.buildBreadCrumb(this.activatedRoute.root);
+    //         });
+    //     } else {
+    //       this.breadcrumbs = this.buildBreadCrumb(this.activatedRoute.root);
+    //     }
+    //   });
   }
 
   /**

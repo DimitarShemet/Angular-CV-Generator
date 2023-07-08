@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -29,6 +29,7 @@ import { IOption } from 'src/app/shared/interfaces/common.interface';
     NzIconModule,
     GetErrorMessagePipe,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent extends BaseControl {
   @Input() listOfOption: IOption[];

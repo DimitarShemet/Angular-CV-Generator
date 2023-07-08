@@ -39,7 +39,7 @@ import {
 } from 'src/app/store/actions/employees-actions';
 import { loadProjects } from 'src/app/store/actions/projects-actions';
 import { projectsSelector } from 'src/app/store/selectors/projects-selectors';
-import { EmployeeFormComponent } from '../../../../shared/components/employee-form/employee-form.component';
+import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 @Component({
   selector: 'app-employee-edit-cv',
   templateUrl: './employee-edit-cv.component.html',
@@ -131,15 +131,12 @@ export class EmployeeEditCvComponent implements OnInit {
   }
 
   addProject() {
-    console.log(this.projectsForm.controls);
     const selectedProjectId = this.selectedProject?.value;
-    console.log(selectedProjectId);
     if (selectedProjectId) {
       this.projectsApiService
         .getProjectById(selectedProjectId)
         .subscribe((project) => {
           this.projectsForm.push(this.fb.control(project.attributes));
-          console.log(this.projectsForm.controls);
           this.changeDetectorRef.markForCheck();
         });
       this.selectedProject.reset();
@@ -162,13 +159,14 @@ export class EmployeeEditCvComponent implements OnInit {
     const currentCvIndex = newCvs.findIndex(
       (elem) => elem.id === this.selectedCv.id
     );
-    console.log(currentCvIndex);
+
     newCvs[currentCvIndex] = {
       id: this.selectedCv.id,
       name: this.selectedCv.name,
       ...this.employeeForm.value,
       projects: [...this.projectsForm.value],
     };
+
     this.employee
       ? this.store.dispatch(
           changeEmployeeCv({

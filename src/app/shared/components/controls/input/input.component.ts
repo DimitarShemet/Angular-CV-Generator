@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { BaseControl } from '../../../classes/base-control.class';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -12,6 +12,7 @@ import { GetErrorMessagePipe } from 'src/app/shared/pipes/get-error-message.pipe
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 
   imports: [
     CommonModule,

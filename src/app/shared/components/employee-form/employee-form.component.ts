@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -33,6 +33,7 @@ import { skillsSelector } from 'src/app/store/selectors/skills-selectors';
     SelectComponent,
     NzButtonModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeeFormComponent extends BaseControl {
   skillsOption: Observable<IOption[]> = this.store.select(skillsSelector);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -9,6 +9,7 @@ import { addProject } from 'src/app/store/actions/projects-actions';
   selector: 'app-project-create-page',
   templateUrl: './project-create-page.component.html',
   styleUrls: ['./project-create-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectCreatePageComponent {
   form: FormGroup;
@@ -16,7 +17,7 @@ export class ProjectCreatePageComponent {
 
   constructor(fb: FormBuilder, public store: Store, private router: Router) {
     this.form = fb.group({
-      projectForm: [null],
+      projectForm: null,
     });
   }
 
