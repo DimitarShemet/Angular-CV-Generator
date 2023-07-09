@@ -2,19 +2,19 @@
   <app-input
     formControlName="username"
     placeholder="Username"
-    label="Username"
+    [label]="'auth.username' | translate"
   ></app-input>
   <app-input
     formControlName="password"
     type="password"
     placeholder="Password"
-    label="Password"
+    [label]="'auth.password' | translate"
   ></app-input>
   <div class="details">
-    <label nz-checkbox>Remember me</label>
-    <span>Forgot your password?</span>
+    <label nz-checkbox>{{ "auth.remember" | translate }}</label>
+    <span>{{ "auth.passwordForgot" | translate }}</span>
   </div>
   <button nz-button nzType="primary" nzSize="large" nzBlock type="submit">
-    Login
+    {{ "auth.logIn" | translate }}
   </button>
 </form>

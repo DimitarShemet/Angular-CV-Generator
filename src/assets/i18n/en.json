@@ -1,8 +1,10 @@
 {
-  "enter": {
-    "label": "Add note",
-    "placeholder": "Enter the title",
-    "button": "Add"
+  "auth": {
+    "username": "Username",
+    "password": "Password",
+    "remember": "Remember me",
+    "passwordForgot": "Forgot your password?",
+    "logIn": "login"
   },
   "filter": {
     "label": "Search by tag",

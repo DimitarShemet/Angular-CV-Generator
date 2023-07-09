@@ -8,7 +8,9 @@ import { InputComponent } from 'src/app/shared/components/controls/input/input.c
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthFormComponent } from './components/auth-form.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'src/app/app.module';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [AuthFormComponent, AuthPageComponent],
@@ -22,6 +24,15 @@ import { TranslateModule } from '@ngx-translate/core';
     AuthRoutingModule,
     TranslateModule,
     NzSpinModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      extend: true,
+      defaultLanguage: 'en',
+    }),
   ],
 })
 export class AuthModule {}

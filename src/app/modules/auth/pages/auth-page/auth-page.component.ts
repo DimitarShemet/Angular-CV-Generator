@@ -1,9 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TranslateLoader, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auth-page',
@@ -14,7 +10,10 @@ import {
 export class AuthPageComponent {
   isSpinning = false;
 
-  constructor() {}
+  constructor(public translate: TranslateService) {}
+  ngOnInit() {
+    this.translate.use('en');
+  }
 
   enableSpinner(condition: boolean) {
     this.isSpinning = condition;
